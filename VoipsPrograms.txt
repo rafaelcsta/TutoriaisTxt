@@ -1,0 +1,57 @@
+
+Adphone
+Com este soft, você pode falar por dois minutos gratuitamente com qualquer telefone fixo do mundo.
+Basta cadastrar-se no site e, a partir de então, é só fazer as ligações. É possível também comprar créditos,
+conversar com outros usuários Adphone e do Skype e mandar mensagens de voz.
+
+Camfrog
+Com este programa você pode conversar por voz em tempo real com qualquer pessoa do mundo. 
+Similar a um site de bate-papo, você cria uma conta e pode falar em diversas salas com vários usuários ao mesmo tempo.
+
+Fring
+Este programa para celular permite a comunicação multi-protocolo por Internet. Você pode conversar por voz e 
+trocar mensagens de texto. Reúne Skype, MSN Messenger, Google Talk, ICQ, SIP e Twitter. 
+
+Gizmo
+Este soft é semelhante ao Skype, permite ligações para computadores sem taxa e para telefones
+com o pagamento de pequenas tarifas. O serviço que fornece um número de telefone ao usuário
+ainda não está disponível no Brasil, mas ao cadastrar-se você ganha um crédito de U$ 25
+para fazer ligações. O programa dá 40 minutos grátis para ligações para amigos em 60
+países e possui integração com Windows Live Messenger, Yahoo! Mesenger e Google Talk.
+
+Google Talk
+O Google não poderia ficar de fora desta tendência e lançou o Google Talk.
+O programa funciona integrado ao gmail (cliente de e-mail da empresa) para troca de
+mensagens instantâneas pelo computador. Ele ainda não disponibiliza serviço de ligação
+para telefones, mas o recurso é esperado para as novas versões. Pode ser usado no celular
+e ainda mandar recados por voz quando alguém não está conectado ao soft.
+
+MinoCall
+Faça ligações do seu celular usando a conexão com a Internet.
+Você carrega créditos e acessa o software a partir do dispositivo móvel.
+Aí é só fazer ligações para telefones fixos e móveis, DDD e DDI a um custo bem 
+abaixo dos cobrados pelas operadoras. Está disponível em várias plataformas
+como J2ME, Palm, Blackberry, Windows Mobile e Symbian.
+
+Skype
+O mais popular dos programas de VoIP, o Skype tornou a tecnologia conhecida em todo o mundo.
+Hoje, conta com versão para celular e para empresas. Você pode conversar gratuitamente entre
+PCs e comprar créditos para ligar ou receber ligações de telefones. Ele permite ainda trocar
+arquivos e fazer conferências com até nove pessoas.
+
+VoipBuster
+Permite fazer ligações gratuitas para mais de 40 países desde que você adicione créditos.
+Além disso, ele cobra pequenas taxas para ligações para países como o Brasil. 
+
+Voipdiscount
+Este programa dá créditos para cada amigo que você adiciona.
+Assim, você junta dinheiro para fazer as ligações para qualquer telefone e ganha
+um mês em ligações para telefones fixos. Mas seus amigos também devem se cadastrar
+no programa para você receber os benefícios. Ele permite ainda enviar SMS, comprar
+créditos e fazer ligações gratuitas para alguns países.
+
+UOL VoIP
+Este programa funciona como um telefone no seu computador, permitindo ligações para
+telefones fixos, móveis e também para computadores. As taxas são até 96% menores
+que as cobradas pelas empresas de telefonia.
+

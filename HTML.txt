@@ -1,0 +1,178 @@
+Bisús Iniciais de HTML
+
+<script>alert("abcd efGh")</script>
+
+
+
+
+site tutorial: http://pt-br.html.net/tutorials/html/lesson8.php
+
+
+Exemplo 1:
+
+
+<a href="http://www.html.net/">Aqui um link para HTML.net</a>
+
+  
+Será renderizado no navegador assim:
+
+Aqui um link para HTML.net
+
+O elemento a refere-se a "anchor" - âncora . O atribuito href é abreviação para "hypertext reference" - referência a hypertexto - e especifica o destino do link 
+- que normalmente é um endereço na Internet ou um arquivo.
+
+No exemplo acima o atributo href tem o valor "http://www.html.net", que é o endereço completo do site HTML.net e é chamado de URL (Uniform Resource Locator).
+Notar que "http://" deve sempre ser incluido nas URLs. A frase "Aqui um link para HTML.net" é o texto mostrado no navegador como link. Lembre-se de fechar a tag 
+com um </a>.
+
+Como são os links entre minhas próprias páginas?
+
+Se você quer construir links entre páginas de um mesmo website você não precisa escrever o endereço completo de cada página (URL).
+Por exemplo, se você tem duas páginas (vamos chamá-las de pagina1.htm e pagina2.htm) e salvou as duas em um mesmo diretório você constrói 
+um link de uma para a outra usando somente o nome do arquivo no link. Nestas condições, um link da página1.htm para a pagina2.htm é como mostrado abaixo:
+
+Exemplo 2:
+
+
+<a href="page2.htm">Aqui um link para a pagina 2</a>
+
+ 
+Se a pagina2 for colocada em um subdiretório (chamado de "subdiretorio"), o link é como mostrado abaixo:
+
+Exemplo 3:
+
+
+<a href="subdiretorio/pagina2.htm">Aqui um link para a pagina 2</a>
+
+ 
+Por outro lado, um link da pagina2 no "subdiretorio" para a pagina1 é como mostrado a seguir:
+
+Exemplo 4:
+
+
+<a href="../pagina1.htm">Aqui um link para a pagina 1</a>
+
+  
+"../" aponta para o diretório a um nível acima do arquivo onde foi feito o link. Seguindo o mesmo princípio você pode apontar para dois (ou mais) níveis acima,
+ escrevendo "../../".
+
+Você entendeu? Como alternativa você pode usar sempre o endereço completo do arquivo (URL).
+
+Como são os links dentro de uma mesma página?
+
+Você pode criar links internos, dentro da própria página - por exemplo, uma tabela de conteúdos ou índice com links para cada um dos capítulos em uma página.
+ Tudo o que você precisa é usar o atributo id e o símbolo "#".
+
+Use o atributo id para marcar o elemento que é o destino do link. Por exemplo:
+
+
+<h1 id="heading1">Cabeçalho 1</h1>
+
+  
+Você agora pode criar um link que leve àquele elemento usando o símbolo "#" no atributo do link. O símbolo "#" informa ao navegador para ficar na mesma página 
+que está. O símbolo "#" deve ser seguido pelo valor atribuido a id para onde o link vai. Por exemplo:
+
+
+<a href="#heading1">Link para o cabeçalho 1</a>
+
+  
+Tudo fica claro com um exemplo:
+
+Exemplo 5:
+
+
+<html>
+  
+  <head>
+  </head>
+ 
+  <body>
+ 
+    <p><a href="#heading1">Link para cabeçalho 1</a></p>
+    <p><a href="#heading2">Link para cabeçalho 2</a></p>
+ 
+    <h1 id="heading1">Cabeçalho 1</h1>
+    <p>Texto texto texto texto</p>
+ 
+    <h1 id="heading2">Cabeçalho 2</h1>
+    <p>Texto texto texto texto</p>
+  
+  </body>
+ 
+</html>
+
+  
+Será renderizado no navegador assim (clique nos dois links):
+
+Link para cabeçalho 1
+
+Link para cabeçalho 2
+
+Cabeçalho 1
+
+Texto texto texto texto
+
+Cabeçalho 2
+
+Texto texto texto texto
+
+(Nota: O nome de um atributo id deve começar com uma letra)
+
+Posso criar link para mais alguma coisa?
+
+Você pode criar link para um endereço de e-mail. Isto é feito de modo semelhante aos links para documentos.
+
+Exemplo 6:
+
+
+<a href="mailto:nobody@html.net">Enviar e-mail para nobody em HTML.net</a>
+
+  
+Será renderizado no navegador assim:
+
+Enviar e-mail para nobody em HTML.net
+
+A única diferença é que no lugar do endereço do documento você escreve mailto:
+seguido pelo endereço de e-mail. Quando o link é clicado o programa de e-mail padrão do usuário é aberto com o endereço do link já digitado na linha para destinatário.
+Mas, atenção, isto só irá funcionar se o usuário tiver um programa de e-mail instalado na sua máquina. 
+Faça uma experiência com este tipo de link clicando no exemplo acima.
+
+Existem outros atributos que eu deva conhecer?
+
+Par criar links você sempre usa o atributo href. Adicionalmente você pode usar um title (título) para seu link:
+
+Exemplo 7:
+
+
+<a href="http://www.html.net/" title="Visite HTML.net e aprenda HTML">HTML.net</a>
+
+  
+Será renderizado no navegador assim:
+
+HTML.net
+
+O atributo title é usado para fornecer uma breve descrição do link. Se você - sem clicar no link - colocar o cursor do mouse sobre o link, 
+vai aparecer o texto "Visite o site HTML.net e aprenda HTML".
+
+Campos de inserção
+
+Tag <input> - Formulário de Caixa de Texto (Text Input Box)
+Vamos começar este tutorial sobre formulário ensinando a criar o tipo mais de formulário, uma simples caixa de texto, daquela que inserimos nosso login ou nome,
+por exemplo.
+
+Existem algumas características que precisamos saber antes de criarmos esse tipo de formulário em nossos sites em HTML.
+Primeiro é que usaremos a tag <input> (input, em inglês, é entrada) para essa caixa.
+Como queremos que esse formulário seja do tipo texto, precisamos dar o valor "text" ao tributo type.
+Já que é possível criar vários formulário, é uma boa prática darmos nome aos nossos formulários, através do atributo name, que recebe o valor que quisermos 
+(o nome que escolhermos).
+E se você se lembrar bem, existem caixas de texto com diversos tamanhos, pequenas e grandes, esse tamanho é definido pelo atributo size (tamanho, em inglês).
+
+Assim, a sintaxe para criarmos um formulário do tipo Caixa de Texto é:
+<input type="text" name="NOME_DO_FORMULARIO" size="TAMANHO_DO_FORMULARIO">
+
+Por exemplo, vamos criar uma caixa de texto de nome 'Nome' e de tamanho 40 (40 caracteres):
+<input type="text" name="Nome" size="40" /> 
+
+O resultado é:
+
+ Simples, não?

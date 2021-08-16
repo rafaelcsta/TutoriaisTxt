@@ -1,0 +1,1 @@
+apt install apt-transport-https && apt update && apt install -y metasploit-framework set apache2 hydra net-tools sslstrip iceweasel crunch sqlite3 ettercap perl

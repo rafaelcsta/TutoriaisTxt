@@ -1,0 +1,103 @@
+RECUPERANDO GRUB
+
+
+http://www.akkiri.com/artigo.php?id=9
+
+https://www.vivaolinux.com.br/dica/Solucao-para-grub-rescue-sem-Live-CD
+
+essas duas fontes acima devem ser usadas juntas pois um artigo complementa o outro.
+
+primeiro você deve saber que o
+
+GRUB RESCUE> é um shell independente que situa-se no inicio master inicialização.
+
+usage:
+
+ls (mostra as partições existentes no hd)
+set (configura root= seta o root do sistema de arquivos selecionado),( set prefix= indica o local onde se trabalhará)
+
+sabendo disto aplicamos: 
+
+ls
+
+teremos (hd0) (hd0,msdos1) (hd0,msdos2).... ou só (hd0,1)....
+dependendo do modelo apresentado 
+escolheremos o nosso referente a nossa partição, então
+
+ls (hd0,msdos5)
+se a saida indicar um sistema de arquivo ext2 ou ntfs.. sifnifica que temos um sistema instalado e a partição é válida.
+
+então chamamos o root dela
+
+set root=(hd0,msdos5) este comando equivale setar sda5...
+
+set prefix=(hd0,msdos5)/boot/grub
+nota-se que estamos dentro da participação entrando na pasta que contem os arquivos do grub. E Sim paramos exatamente aqui!
+
+insmod linux 
+aciona o linux
+
+linux /vmlinuz root=/dev/sda5 ro
+
+initrd /initrd.img
+
+boot
+
+após a inicialização do sistema
+
+logue como root# e ao abrir um terminal
+atualize e reinstale o grub.
+
+update-grub
+
+grub-install /dev/sda
+
+se a saida for No error reported
+
+só dar um reboot e ta tudo certo.
+
+
+-----------------------------------------------------
+CASO O PROBLEMA SEJA O WINDOWS TER SOBREPOSTO SEUS DEMAIS SISTEMAS
+A SOLUCAO EH A SEGUINTE,
+
+VOCE DEVE USAR A MIDIA EQUIVALENTE AO SISTEMA KALI DA VERSAO QUE ESTA TENTANDO RECUPERAR O GRUB.
+
+ENTRE NO TERMINAL DO LIVE e SEGUE O PASSO A PASSO.
+
+mount /dev/sdaX /mnt    (onde X deve ser substituido pelo numero da particao que esta o seu linux)
+mount --bind /dev /mnt/dev
+mount --bind /dev/pts /mnt/dev/pts
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+chroot /mnt             (aqui ele vai te dar a raiz do seu sistema, onde voce vai reinstalar o grub e dar um update)
+grub-install /dev/sda   (nao confunda, nessa parte eh sda mesmo, que eh a particao de inicializacao mestra)
+update-grub
+exit                    (aqui ele retorna pro seu live)
+umount /mnt/dev/pts
+umount /mnt/dev
+umount /mnt/proc
+umount /mnt/sys
+umount /mnt
+
+reboot
+
+a ideia eh apos reiniciar verificar se o grub pegou
+
+se o grub nao aparecer, tente repetir o processo ja de dentro do live /media/root/nomeparticaolinux
+mountado pelo navegador de arquivos/outros locais e apos dar um novo reboot verificar novamente... e na terceira vez
+ao inves de observar o grub faca novamente em seguida seu live sem parar pra ver grub e ao finalizar os comandos
+adicione mais esses dois apos o reboot sem olhar o grub
+
+os-prober
+update-grub
+
+mas eh certo de seu grub iniciar de primeira com esses dos metodos infaliveis.
+
+---------------------------------------------------------------------------------------------------
+TF:
+
+apks
+
+MK 3 .cso or  iso,  APPS MARKET UP.
+apks de programação C4droid

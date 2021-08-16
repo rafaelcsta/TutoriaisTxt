@@ -1,0 +1,29 @@
+ifconfig wlan0 down
+ifconfig wlan0 hw 00:11:22:33:44:55
+ifconfig wlan0 up
+airmon-ng check kill
+airmon-ng start wlan0
+ifconfig wlan0mon down
+macchanger -r 00:11:22:33:44:55
+ifconfig wlan0mon up
+
+neste modo toda vez que eu for usar o aireplay-ng eu uso
+no final do comando -h 00:11:22:33:44:55
+
+eh sempre bom ter seu mac origal gravado...
+isso funcionaria muito bem para por exemplo
+garantir acesso a uma rede que usa filtro de mac,
+se durante o processo de captura o mac dos clientes
+forem anotados, futuramente apos decifrar a senha
+pode substitui-lo, o desautenticando e logando
+com o endereco do cliente permitido pelo filtro.
+
+TESTAR NA PRATICA.
+
+mc 1 7a:4b:e2:12:48:e7
+
+mc 2 00:11:22:33:44:55
+
+mc 3 real dc:85:de:91:7c:87
+
+

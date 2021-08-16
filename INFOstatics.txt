@@ -1,0 +1,76 @@
+buscadores de IP localizacao
+
+Geolocation
+checkip
+iplocation
+infosniper
+ipgeek
+iplogger
+
+encurtador de links..
+
+Google url shootner
+
+https://goo.gl/
+
+
+rastrear foto
+
+http://exif.regex.info/exif.cgi
+
+
+
+DRAGONBALL SUPER 109-110
+
+
+94484
+957236
+
+
+https://www.nsa.gov/search/?q=PRISM
+
+password router scan: rekings.com
+
+192.168.0.1
+192.168.1-10,199.1
+10.0.0.1-10.0.0.254
+172.16.0.0/12
+
+port scan nmap
+https://nmap.org/download.html
+
+video tutorial nmap:
+Scaneando a rede para encontrar alvos e vulnerabilides usando o Nmap - Scanning IP #1
+
+site pra car erros nos routers
+
+routerpwn.com
+
+shodan.com
+
+sql etc
+
+acunetix.exe
+havij.exe
+sqlmap.exe
+
+How to download and install Sqlmap on Windows 10 | Windows 10' a Sqlmap indirme ve y leme
+https://www.youtube.com/watch?v=gpNVzzoEi3c
+
+
+Encontrando sites vulnereis a SQL Injection (SQLi Scan - Acunetix) - Invadindo sites #1
+
+Fazendo SQL Injection com Havij - Invadindo sites #2 - (SQLi Havij - Modo GET)
+
+Live Usb persistent
+
+How to make a persistent Kali Linux USB Drive
+https://www.youtube.com/watch?v=SEVGxIUkhSA
+
+Anonimato:
+
+Whonix
+
+
+vulnerel
+http://www.reginas.com.br/tr.htm

@@ -1,0 +1,41 @@
+﻿Para fazer isso, primeiro digite no console ou terminal:
+
+# w
+
+
+Deve aparecer algo do tipo:
+
+ 09:25:01  up 18:39,  1 user,
+load average: 0.00, 0.00, 0.00
+USER     TTY      FROM    
+LOGIN@   IDLE   JCPU   PCPU  WHAT
+userx    pts/0    
+10.000.000.000     9:02am  0.00s  0.17s  0.02s  w
+
+
+Isso quer dizer que existe um usuário chamado userx em pts/0. Com isso você digita:
+
+
+# mesg y
+
+
+Para habilitar a troca de escrita pelo seu terminal e depois você manda a mensagem da seguinte forma:
+
+
+# write userx pts/0
+
+
+O pts/0 é opcional, mas recomendo usar, pois o mesmo usuário pode estar em vários TTY.
+
+
+Para sair da troca de mensagens é só apertar CTRL + c.
+
+
+Não esqueça de mandar uma mensagem para o outro usuário falando para ele usar o comando "mesg y" 
+antes do write.
+
+Se você quiser fazer um teste, use seu usuário e TTY no comando write que funciona! 
+
+https://solitudelab.wordpress.com/2017/12/19/netcat-o-canivete-suico/
+
+modo funcional com o nc (netcat) deve ser instalado no windows para uma conexão Linux/Windows.

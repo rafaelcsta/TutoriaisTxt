@@ -1,0 +1,29 @@
+Buf Over Flow
+
+https://juancarloscunha.wordpress.com/2009/05/12/ataque-buffer-overflow/
+
+Evill Acess Point (Gemeo do Mal)
+
+http://essecurity.com.br/wifiphisher-um-novo-metodo-para-hacking-wpawpa2/
+
+https://null-byte.wonderhowto.com/how-to/hack-wi-fi-creating-evil-twin-wireless-access-point-eavesdrop-data-0147919/
+
+https://tools.kali.org/wireless-attacks/wifiphisher
+
+
+
+Conectar wifi por linha de comando
+
+http://sourcebrasil.org/tutoriais/visualizar/conectando-em-redes-sem-fio-pelo-terminal.html
+
+
+ver mac gatway e ip no windows
+
+ipconfig /all
+
+nslookup
+
+Router Scan 
+
+https://www.youtube.com/watch?v=RucI8KjxRps&t=32s
+

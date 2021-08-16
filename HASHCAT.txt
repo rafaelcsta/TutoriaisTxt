@@ -1,0 +1,151 @@
+﻿1) capturar o handshake na pasta do ataque.
+
+
+2) converta o arquivo .cap para .hccap
+veja o help do aircrack-ng -h
+
+tem a opção -J=create Hashcat Capture file
+
+a linha é
+
+aircrack-ng -J <novo nome do handshake> <arquivo.cap>
+
+
+teremos uma saída como se quebrando handshake no aircrack-ng pelo terminal Xperia.
+tem que exibir Successfully written to ....hccap
+
+
+3) quebrar no hashcat
+
+hashcat -h
+
+-m method (numero referente ao tipo de hash)
+
+esse tipo é wpa captured handshake
+numero 2500 na versão hashcat do video
+
+logo monta-se
+o comando 
+
+
+hashcat -m 2500 -a 3
+
+-a =modo de ataque em seguida especificar número assim como no -m.
+
+
+3 indica modo Brute-Force
+ do item * Attack modes..
+
+para ver a sintaxe só digitar hashcat -h
+....
+
+
+
+para testar velocidades durante a quebra de diferentes tipos de hashs 
+
+hashcat -b (benchmark) ou ainda 
+hashcat -b --force 
+caso não esteja rodando um hardware de suport Cuda ou OpenGL
+
+agora vamos selecionar um item do item
+ *Built-in 
+charsets: 
+dai você insere o par de caracteres equivalente a cada digito que almeja na senha.
+
+
+então se é 3 digitos só numeros então 
+será ?d?d?d=3 digitos númericos
+
+
+
+TABELA Built-ins
+
+ 
+?l = interrogação + éle equivale a letras minusculas abcdef.....z
+ 
+?u = LETRAS MAIÚSCULAS
+
+?d = números 0 à 9
+
+?h = numeros e letras minusculas
+?H = numeros e letras MAIUSCULAS
+?s = símbolos
+
+?a = paterns hashcat
+
+?b = 0x00 - 0xff (acho que é exadecimal e binários)
+
+COMANDO FINAL
+
+
+hashcat -m 2500 -a 3 file.hccap tipo de  Built-in
+
+ enter
+ 
+deve dar uma saida perguntando as letras 
+
+use (s) 
+
+podemos usar todos os Builts disponiveis...
+a logica é como o crunch... 
+
+
+podemos restaurar a sessão como no hydra...
+ pesquisar depois quebras com wordlists 
+
+aqui vai tutorial bem explicado de como converter
+os arquivos para hccapx que eh 
+o formato aceito pelo hashcat: 
+
+
+
+https://translate.google.com.br/translate?hl=pt-BR&sl=es&u=https://www.wifi-libre.com/topic-783-que-ventajas-trae-el-nuevo-formato-hccapx-para-crack-con-hashcat.html&prev=search
+
+
+
+depois de todos os passos acima, voce vai em
+
+cd /usr/share/hashcat-utils/
+ls
+./cap2hccapx.bin
+
+entao executamos ele afim de transformar o arquivo cap diretamente em
+hccapx
+
+ 
+
+./cap2hccapx.bin caminhodoarquivo-01.cap nomedonovoarquivo.hccapx 
+
+
+
+explicacao
+ 
+
+cap2hccapx input.pcap output.hccapx [filter by essid] [additional network essid:bssid]
+
+ 
+
+podemos tambem mesclar todos os hccapx de uma pasta num soh arquivo usando
+
+ 
+
+cat directoriohandshakes/*.hccapx > capturacombinada.hccapx
+
+ 
+
+DETALHE, Nao usar deauth diretamente no AP a fim de evitar mais de um aperto,
+esperamos pegar 1 aperto de um unico cliente por isso sempre vamos usar -c no
+
+deauth para especificar o cliente fixo para a captura de um unico handshake.
+
+linha para salvar senhas num arquivo de saida, pode alterar o item -D 1 2 3 e
+o charset.
+
+
+
+hashcat -m 2500 -a 3 -D 1 -w 4 --potfile-disable -o oi.txt all.hccapx 1988?d?d?d?d --force
+
+
+
+
+ --status

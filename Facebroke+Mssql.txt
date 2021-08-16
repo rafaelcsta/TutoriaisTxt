@@ -1,0 +1,5 @@
+perl Zhacker.pl 1000102015124 ˜/Desktop/wordlist.txt
+
+
+link do nullbyete mssql atack tutorial:
+https://null-byte.wonderhowto.com/how-to/hack-databases-cracking-sql-server-passwords-owning-server-0149636/

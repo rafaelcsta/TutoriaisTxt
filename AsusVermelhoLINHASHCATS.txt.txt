@@ -1,0 +1,11 @@
+C:\Users\BlackCyber\Desktop\hashcat-3.5.0\hashcat64.exe -m 2500 -a 3 -D 1 -w 4 --potfile-disable -o C:\Users\BlackCyber\Desktop\test1.txt C:\Users\BlackCyber\Desktop\TRANSFILER\HANDSHAKES2\ALLhccapxs\ALLhccapxinone\all.hccapx a?l?l?l?l?l@123 --force --status
+
+C:\Users\BlackCyber\Desktop\hashcat-3.5.0\hashcat64.exe -m 2500 -a 0 -D 1 -w 4 -o C:\Users\BlackCyber\Desktop\test1.txt C:\Users\BlackCyber\Desktop\TRANSFILER\HANDSHAKES2\ALLhccapxs\velox.hccapx C:\Users\BlackCyber\Desktop\TRANSFILER\wordlists\fixolocal+datas2.txt --force --status
+
+melhores charsets:
+
+12345678
+87654321
+abcdefgh
+?d?d?d?d?d?d?d?d
+?l?l?l?l?l?l?l?l

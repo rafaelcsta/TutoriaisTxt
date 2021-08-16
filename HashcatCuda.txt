@@ -1,0 +1,59 @@
+https://code.google.com/archive/p/pyrit/downloads
+
+anotacoes do tutorial do video:
+
+iniciando passo 1:
+
+leafpad etc/apt/sources.list
+
+INSERIR AS LINHAS CORRETAS
+salva
+
+
+apt-get update && apt-get dist-upgrade -y && reboot
+
+lspci -v
+
+verificar se reconheceu no item VGA ---------------
+
+passo 2 instalar os drives apos intalar manualmente a placa.
+
+apt-get install -y ocl-icd-libopencl1 nvidia-driver nvidia-cuda-toolkit
+
+dar ok na perginta da tela azul.
+
+conferir se o driver foi instalado com sucesso
+
+nvidia-smi
+
+tem que abrir uma tela igual quando se executa um script, dai vc procura o nome da placa
+apos a o nome e modelo da placa vai estar escrito Off nao ligue para isso siga em frente
+
+conferir se o hashcat e o cuda estao funcionando
+
+hashcat -I
+
+verificar os status
+
+ve se o nome da plca aparece e se os programas estao funcionando
+
+testar quebra de senha
+
+hashcat -b (o famoso benchmark)
+
+
+apt-get install -y clinfo
+
+
+FIM
+
+https://tracker.debian.org/pkg/nvidia-cuda-toolkit
+
+nvidia-cuda-toolkit 8.0.61-3
+
+outra coisa mbi 
+https://www.mbi.com.br/mbi/produtos/superbina/windows/
+
+
+
+

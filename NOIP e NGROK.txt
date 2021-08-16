@@ -1,0 +1,114 @@
+INSTALANDO E CONFIGURANDO O NO-IP NO LINUX
+
+tar -jxvf nome do arquivo terminado em .tar.bz2
+
+Se for tar.xz o comando será:
+
+tar -Jxxvf nome do arquivo terminado em .tar.xz
+
+E caso seja tar.gz:
+
+tar -zxvf  nome do arquivo terminado em .tar.gz
+
+
+  
+
+
+ 
+Muitas vezes queremos acessar um determinado computador remotamente, mas lembramos que o ip não é fixo, pois provavelmente usamos uma conexão que não nos dá o luxo de ser uma conexão dedicada. Como resolver isso? Usando um serviço de DNS dinâmico. Nesta dica veremos o NO-IP. 
+
+Para instalar o cliente for Linux do noIP, os passos são os seguintes: 
+
+1 - Registre sua conta no www.no-ip.com/. 
+
+2 - Instale o no-ip através do apt-get: 
+
+# apt-get install no-ip
+
+3 - O próximo passo é executar noip2-Linux usando a opção "-C -c" (create config), que cria o arquivo de configuração. Você pode indicar onde 
+o arquivo será criado, basta indicá-lo no comando. Nesta etapa ele pedirá o login de usuário e o domínio registrado no site: 
+
+# no-ip -C -c /etc/no-ip.conf 
+Auto configuration for Linux client of no-ip.com.
+Multiple network devices have been detected. 
+
+No caso aqui ele vai pedir que seja selecionada a placa de rede que se conecta à internet, no meu caso é a interface eth1, ou seja, a opção 1: 
+
+Please select the Internet interface from this list.
+By typing the number associated with it.
+0       eth2
+1       eth1 
+
+Após a escolha da interface padrão que o seu host se conecta pela internet ele vai pedir o email com o qual você se cadastrou no site do no-ip e a senha: 
+
+Please enter the login/email string for no-ip.com "email"
+Please enter the password for user 'email' "senha" 
+
+Defina qual host ele vai atualizar o IP (se houver mais de um ele mostra todos). 
+
+5 hosts are registered to this account. 
+
+No meu caso, tenho 5 hosts registrados. 
+
+Caso deseje, informe um programa ou script a ser executado a cada atualização. 
+
+4 - Com o arquivo de configuração criado, inicie o no-ip rodando o comando abaixo: 
+
+# /etc/init.d/no-ip restart 
+
+Pronto, ele já está configurado, funcionando e configurado para iniciar no boot. 
+
+
+NO TP LINK
+
+configurar portas e servidores virtuais e setar ipwan do router em ip/alvo no site
+usando o nome de endereco criado no site para redicecionar.
+
+OU podemos fazer algo mais simples como usar a ferramenta NGROK que sem sombra
+de duvidas se mostrou hiper eficiente e infalivel para conexao externa de qualquer
+router com a grande internet MUNDIAL.
+
+Funciona da seguinte forma... seu ip local eh setado em um servidor externo ngrok,
+que liga um servidor de sua maquina a internet mundial resumidamete eh simples assim
+
+Dai voce abre o terminal e seta:
+
+./ngrok tcp 4444
+
+desta forma voce soh terah que se preocupar com uma forma de fazer seu payload ser gerado poucos
+minutos apos estartar o ngrok, ja que teremos que setar o nome de host aleatorio que nos eh entregue somente apos iniciar o ngrok... feito isso podemos setar no msfconsole o proprio host local no msfconsole, mas na hora do payload eh o nome de endereco.
+
+e enfim eh soh aguardar a conexao.
+
+vantages e desvantagens de ngrok vs noip
+
+vantagens
+
+ngrok ganha disparado no quesito de facilidade e agilidade de configuracao e inicializacao do
+servico. Deixa o usuario acessivel em apenas 1 click.
+
+noip possui nome de host fixo por 30 dias cabendo ateh 3 candangos kkk
+
+ngrok suporta https e garante o anonimato do usuario..
+
+noip suporta multiplos servicos em multiplos hosts em um soh nome de dominio.
+
+noip sustenta um payload por ateh 30 dias..
+
+noip limita o acesso remoto apenas em redes de mesmo provedor
+
+ngrok se mantem ativo com a tela escurecida.
+
+NGROK TE DA ACESSO REMOTO VIA INTERNET MUNDIAL.
+
+
+*****  PARA ATIVAR TCP no NGROK
+
+my authtoken ngrok
+
+./ngrok authtoken 3BcE391bj39TbGJJCmAih_7ZiXokJUuFs7Pzhott6YQ
+
+email: rafael_for.work@outlook.com  nick: BlackCyber21
+senha: Hafacker11
+
+tcp 4444 endereco 0.tcp.ngrok.io  sempre a porta externa vai mudar

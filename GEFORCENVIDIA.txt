@@ -1,0 +1,81 @@
+Adaptador dvd HDD SATA 20 reais:
+https://produto.mercadolivre.com.br/MLB-876289251-adaptador-dvd-p-hd-ou-ssd-sata-notebook-drive-caddy-127mm-_JM
+
+Instalação em inglês para os comandos
+
+https://docs.kali.org/general-use/install-nvidia-drivers-on-kali-linux
+
+em português para entender o tutorial
+
+https://translate.google.com.br/translate?hl=pt-BR&sl=en&u=https://docs.kali.org/general-use/install-nvidia-drivers-on-kali-linux&prev=search
+
+placas
+
+https://geek.wish.com/search/ram#cid=5a042060eceb087d662b7a83
+https://geek.wish.com/#cid=59f04c9486ac5b45590e48fe
+https://geek.wish.com/#cid=59f06518ec66124a21d86fb5
+https://geek.wish.com/search/nvidia%20gtx#cid=59c19955e0dc5405bd0ebc6e
+https://geek.wish.com/search/nvidia%20gtx#cid=59d9f3877d1f5604e438d033
+https://geek.wish.com/search/gtx%20cuda#cid=59f3fba579287f2d19db38b3 (2x essa e teremos 8GB alcançando 100.000.000 GB/s) preço 137x2 + frete e cabos
+é o melhor preço!!
+
+
+
+
+
+
+video tutorial instalação mecanica e windows....
+
+https://www.youtube.com/watch?v=uoygvMlZOmo
+
+Instalação no kali linux 
+
+https://www.youtube.com/watch?v=xBb3Kxnw_88
+
+gasto total apx 450 total...
+
+Em compensação um salto no tempo. Pyrit pode fazer 900.000/s e até mais. Isso Equivale Por exemplo
+Fazer todo o processo desde a criação ao cracker de uma rede com uma lista de 10.000.000 em apx 10 minutos..
+E uma lista completa de 100.000.000 em menos de uma hora. ATENÇÃO este calculo é uma média
+se for levar em conta também seu processador e todos os seus núcleos esse tempo cai ainda em uns 10% o que te obriga a arrumar
+tanto a placa qaunto os HDS como prioridade!!!
+
+Imagine quantas redes vai poder hackear, imagine quantos DDoS eficientes, imagine quantos bancos de indormações.
+Se puder comprar Duas GeForce e Testar no Preto uma na entrada VGA e outra na HDMI. Que Seja.
+
+LISTA DE MATERIAIS A COMPRAR
+
+Assim que arrumar o emprego:
+
+*Depois de Tirar a Habilitação, e Fazer o Curso MAnutenção de Cell
+Os itens a seguir são Prioridades.
+
+-Chave Philipes gende e pequena. 40,00
+-CAPAS E PELICULAS Z3 60,00
+-GeForce GTX entre a 730 e a 1060 + cabos e adaptadores de conexão 400,00
+-3 internos e 2 externos Drives de Rede pro note preto e reservas 250,00
+-Som pro note Vermelho 40,00
+-3 Adaptadores HDD SATA 1 Drive dvd tbm. 130,00
+-Roteador 2 e 5 ghtz 1200 MBPS
+e 3 REPETIDORES 300 MBPS
+de Tomada. 450,00
+-2 Placas de RAM de 4 GB ou 2 de 8, totalizando entre 8 e 16 gb de memoria. 630,00
+-2 HDS de 1 Terabit. 500,00
+-Processador i7 (opcional, se a instalação DAS gforce's for suficiente pros trabalhos remover o i7 da lista) 2.000 ou rolo
+-Impressora e Xeroz Boa 300,00
+-Amplificador Sonoro 450,00
+-Mouse sem fio, Teclado Dobravel sem fio ou Projetado a Laser 120,00
+-Os Heatsets Pretos 2 e 2 fones 150,00
+-Baterias extras 350,00.
+
+Sem o core i7, 3.870,00
+com o core i7  5,870,00
+Com rolo no note atual talvez o primeiro preço se mantenha..
+Lembrando que esese é um orçamento às preças. o Ideal é pesquisar
+até encontrar o melhor preço a cada produto comprado.
+
+Comprado tudo isso, Entram na lista um Carro e a Faculdade.
+
+*Regra, nenhum grande avanço ou conquista deve ser vendido durante esse processo, você precisará de cada item!!!
+
+#Orçamento projeto Nvidia GeForce 1060 ou + 2 itens=

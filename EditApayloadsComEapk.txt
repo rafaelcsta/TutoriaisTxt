@@ -1,0 +1,28 @@
+Esse Topico eh dedicado as alteracoes a fim de personalizar o payload, dar um
+novo design e assegurar que fique atraente para a vitima e tambem para
+garantir que o mesmo seja executado com sucesso com permissoes de sistema.
+
+1- Criado o payload para android vamos lhe dar a permissao rw-r--r--(644)
+e torna-lo executavel ativando o binario x, em seguida vamos edita-lo.
+
+2- Abrimos o editor de apk com outras aplicacoes para extrair imagens interessantes
+talvez ateh mesmo funcionalidades, talvez consigamos inserir o nosso codigo dentro
+de um apk pronto como por exemplo o whatsapp ou algum app de inicio automatico
+ou um talkback da vida, o que seria otimo.
+
+3- O servico deve ser objetivo, devemos fazer todos os prototipos numa pasta
+e soh entao depois testar, ja que sera uma tarefa bem cansativa por conta de
+ter que mesclar os codigos, o que pra um leigo em programacao nao eh tao simples.
+
+4- Se os testes derem certo e alcancarmos os objetivos, certamente serah uma 
+inovacao extremamente consideravel em seus estudos e pode vir a te fazer crescer
+significativamente no mundo dos hackers
+
+5- Se der errado nao desanime a ideia esta certa voce soh precisa tentar de outro jeito
+
+6- Voce precisa conhecer o comando de ativacao do shell do android para fazer algo executar
+no android como se executa o cmd apartir de um bat no windows... Sabendo isto
+voce pode inserir isso em seus codigos para iniciar programas, navegadores em links e ips.
+
+APKTOOL
+

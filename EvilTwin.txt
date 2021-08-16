@@ -1,0 +1,140 @@
+﻿airmon-ng start wlan0
+
+iwcofig
+
+airodump-ng mon0
+
+pegar bssid e ssid e canal
+
+ctrl+shift+n
+
+airbase-ng -a mac --essid "RedeCopia" -c canal mon0
+
+aireplay-ng --deauth 0 -a macdaredealvo
+
+iwconfig wlan0 txpower 30
+
+iw reg set BO
+
+iwconfig wlan0 txpower 30
+
+iwconfig * ver se foi pra 30
+
+
+
+
+Como podemos ver, nossa placa sem fio está operacional e foi atribuída a wlan0. 
+Nosso próximo passo é colocar nossa placa sem fio em modo monitor ou promíscuo.
+Podemos fazer isso simplesmente por:
+
+    bt> airmon-ng start wlan0 
+
+A Airmon-ng colocou nosso modo sem fio no monitor e renomeou-o para mon0.
+Agora, nossa placa sem fio é capaz de ver todo o tráfego sem fio.
+
+Step 2Start Airdump-Ng Passo 2: Comece Airdump-Ng
+
+
+Nosso próximo passo é começar a capturar o tráfego em nossa placa sem fio. Fazemos isso digitando:
+
+    bt> airodump-ng mon0 
+
+Podemos ver todos os pontos de acesso sem fio em nossa gama, juntamente com todas as suas estatísticas vitais.
+O vizinho que suspeitamos de baixar e vender pornografia infantil é um AP com o SSID "Elroy".
+
+Se fizermos tudo certo, podemos clonar o AP e levá-lo a se conectar ao nosso gêmeo maligno. 
+Quando ele fizer isso, poderemos ver todo o seu tráfego, bem como potencialmente inserindo 
+nossos próprios pacotes / mensagens / código em seu computador.
+
+Step 3Wait for the Suspect to Connect Passo 3: Aguarde até que o suspeito se conecte
+
+Agora, esperamos que o suspeito se conecte ao seu ponto de acesso sem fio. 
+Quando ele faz, ele aparecerá na parte inferior da tela airodump-ng.
+
+Step 4Create a New AP with Same SSID & MAC Address Etapa 4: criar um novo AP com o mesmo SSID e endereço MAC
+
+Uma vez que ele se conecta ao seu AP, podemos usar a base de ar-ng para criar um gêmeo falso ou malvado de seu AP.
+Podemos fazer isso abrindo um novo terminal e digitando:
+
+    bt> airbase-ng -a 00: 09: 5B: 6F: 64: 1E --essid "Elroy" -c 11 mon0 
+
+Onde 00: 09: 5B: 6F: 64: 1E é o BSSID, Elroy é o SSID, e - c 11 é o canal do AP do suspeito.
+
+Step 5Deauthentication or Bumping Him Off Passo 5: Deautenticação ou Bumping Him Off
+
+Nosso próximo passo é colidir o "vizinho" do seu ponto de acesso. O padrão 802.11 tem um quadro especial chamado
+de autenticação que, como você pode esperar, desautoriza todos no ponto de acesso. 
+Quando seu computador tenta autenticar novamente, ele se reconectará automaticamente com o AP mais forte com o ESSID de "Elroy".
+
+Nós podemos fazer isso usando aireplay-ng com o pacote deauth:
+
+    bt> aireplay-ng --deauth 0 -a 00: 09: 5B: 6F: 1E 
+
+Note que, mais uma vez, utilizamos o BSSID no comando aireplay-ng. Se o nosso sinal for mais forte do que o seu próprio AP,
+ele irá se reconectar automaticamente ao nosso gêmeo malvado!
+
+Step 6Turn Up the Power! Passo 6: Levante o poder!
+
+O link crucial no malvado duplo é garantir que nosso AP falso seja mais próximo ou mais forte do que o AP original ou autêntico.
+Isso pode ser uma fraqueza crítica quando o acesso físico não está disponível. Nos aeroportos e outros lugares públicos, 
+isso não é problema, mas no nosso cenário aqui, não temos acesso físico e é muito provável que o AP seja mais próximo
+e mais forte que o nosso. Não deixe isso nos impedir!
+
+Primeiro, podemos aumentar o poder em nosso ponto de acesso na tentativa de ser mais forte do que o dele.
+Mesmo ao lado, isso pode funcionar, pois a maioria dos pontos de acesso reduz automaticamente o seu poder ao 
+mínimo necessário para manter uma conexão com seus clientes. 
+Podemos aumentar o nosso AP para a potência máxima digitando;
+
+    iwconfig wlan0 txpower 27 
+
+Este comando aumentará a nossa potência de saída para o máximo legalmente permitido nos Estados Unidos, 
+27 dBm ou 500 miliwatts.
+
+Em alguns casos, mesmo aumentar o poder para 500 mWs pode revelar-se inadequado. 
+Se tentarmos aumentar o poder no máximo em nossos cartões sem fio Alfa - 1.000 mWs ou 30 dBm - 
+recebemos a mensagem de erro abaixo (algumas das cartas mais recentes podem realmente transmitir a 2.000 mWs
+ou quatro vezes o que é legalmente permitido no NOS).
+
+    iwconfig wlan0 txpower 30 
+
+Nota: Este próximo passo é ilegal nos EUA, então tenha cuidado com isso, a menos que você tenha permissão específica 
+ou seja membro da aplicação da lei.
+
+Cada nação tem seu próprio conjunto de regulamentos Wi-Fi. 
+Alguns permitem mais energia e mais canais do que os EUA. Por exemplo, a Bolívia permite o uso do canal 12 e 1.000 mWs de energia.
+Nós podemos obter o nosso cartão Alfa para usar os regulamentos bolivianos simplesmente digitando:
+
+    iw reg set BO 
+
+Agora que estamos no domínio regulador da Bolívia, podemos aumentar nosso poder ao máximo digitando:
+
+    iwconfig wlan0 txpower 30 
+
+Verifique a potência de saída digitando:
+
+    iwconfig 
+
+E agora podemos ver no final da segunda linha que nosso poder é agora até 30 dBm ou 1000 miliwatts, 
+o suficiente para sobrecarregar todos os outros pontos de acesso locais mesmo de várias casas!
+The Evil Twin está trabalhando agora
+
+Agora que temos o nosso vizinho conectado ao nosso AP, podemos dar os próximos passos para a detecção de sua atividade.
+
+Podemos usar um software como Ettercap para realizar um ataque do homem no meio. Desta forma, 
+podemos interceptar, analisar e até mesmo injetar o tráfego para esse usuário. 
+Em outras palavras, porque ele se conectou ao nosso AP, temos acesso quase total a seus dados, 
+tanto indo e vindo. Se ele realmente está baixando ou vendendo pornografia infantil, podemos interceptá-lo.
+
+Também devemos interceptar e-mails e senhas para outros aplicativos e redes. 
+Poderíamos mesmo injetar um meterpreter ou outro ouvinte no seu sistema para acesso e controle adicionais.
+Fique ligado...
+
+
+Certifique-se de verificar a nossa série Wi-Fi Hacking , porque ainda mais os hacks sem fio estão chegando! 
+Se você tiver alguma dúvida, comente abaixo ou comece uma discussão no fórum Null Byte e tentaremos ajudá-lo.
+Router , lupa e fotos de pontos de acesso sem fio via Shutterstock
+
+Evil Twin por Hackwise com o script completo pro Kali.
+
+https://www.youtube.com/watch?v=-P2b9I3U6hY
+

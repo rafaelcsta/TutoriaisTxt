@@ -1,0 +1,103 @@
+10.7.5.143    japa router
+168.181.62.34 japa wan
+
+200.218.248.162  rio imagem
+
+http://200.218.248.162:8085/PortalDicom/exames DB
+
+191.0.72.162 Hemorio
+
+200.216.116.12 faetec
+
+200.130.24.34 enem
+
+186.202.149.236 AND
+
+187.45.195.14 Prefeitura SJM
+
+52.85.167.162   qedu rj escolas publicas
+
+ciep115 email: ciep115@ig.com.br
+021) 2725-9475 // 2650-3308
+
+
+C.E Professora Norma Toop Uruguay
+RUA MILTON MENDONCA 
+Bairro: CENTRO - CEP: 25015-020 
+Duque De Caxias / RJ 
+TELEFONE
+(21) 2785-9705
+
+
+69.64.57.88 Kinoplex
+
+
+189.45.8.106 olx
+http://www.olx.com.br/
+
+
+
+54.230.226.211 Mercado Livre
+https://www.mercadolivre.com.br/
+
+
+52.8.48.170  geek
+https://geek.wish.com/
+
+
+104.25.14.119 ebanx
+https://conta.ebanx.com/customer/sign_in
+
+
+23.52.37.101 Paypal
+https://www.paypal.com/signin?country.x=BR&locale.x=pt_BR
+
+
+5.62.88.70 Neteller
+https://member.neteller.com/?lang=pt
+
+104.16.65.111  Binary
+https://oauth.binary.com/oauth2/authorize?app_id=1&l=PT
+
+
+
+23.61.112.149 itau
+https://www.itau.com.br/
+
+
+104.105.128.244 Bradesco
+https://banco.bradesco/html/classic/canais-digitais/internet-banking/index.shtm
+
+
+200.201.171.223 Caixa
+https://internetbanking.caixa.gov.br/sinbc/#!nb/login
+
+
+170.66.11.10 Banco do Brasil
+https://www2.bancobrasil.com.br/aapf/login.jsp
+
+
+179.127.127.80 light virtual
+200.216.75.100 LIGHT
+http://www.light.com.br/para-residencias/SitePages/default.aspx
+
+179.127.127.11 light client plus loguin
+https://www.lightvirtual.com.br:8084/clientemais/Login.aspx
+
+
+200.186.72.57 cedae
+http://www.cedae.com.br/
+http://www.cedae.com.br/formularios-sac/f/17  (login)
+
+###########
+
+Routers etc online
+
+http://200.185.214.167:8080/login.htm
+
+201.73.143.170/ (servidor da claro)
+
+177.0.115.10/ (oi internet)
+
+
+

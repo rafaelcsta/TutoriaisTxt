@@ -1,0 +1,66 @@
+Installing Hashcat In Windows GPU AMD Configure Cracking WPA WPA2 With Hashcat
+
+
+
+
+https://m.youtube.com/watch?v=6g631B9WYOY
+
+
+baixar 
+HASHCAT:
+
+
+https://translate.google.com.br/translate?hl=pt-BR&sl=en&u=https://hashcat.net/forum/thread-7012.html&prev=search
+
+
+
+Baixar OpenCL AMD APP:
+
+https://translate.google.com.br/translate?hl=pt-BR&sl=en&u=https://developer.amd.com/amd-accelerated-parallel-processing-app-sdk/&prev=search
+
+
+
+
+AMD Catalyst Radeon HD..
+
+
+http://support.amd.com/pt-br/download
+
+
+
+linha para salvar senhas num arquivo de saida, pode alterar o item -D 1 2 3 e o charset.
+
+
+
+hashcat -m 2500 -a 3 -D 1 -w 4 --potfile-disable -o file.txt all.hccapx 1988?d?d?d?d --force --status
+
+
+
+OBS: Nunca Usar O --remove porque ele remove as hashs ja encontradas de todas as sessions
+a menos que se queira isso neh.
+
+
+--potfile-disable -o file.txt alem de salvar as senhas num arquivo de saida, vai mostrar tambem
+as que ja foram mostradas em outras sessoes.
+
+
+uma coisa a qual devemos nos atentar eh que, o programa neste molde acima soh escreverah um outfile se o charset usado quebrar alguma hash.
+
+entao as senhas aparecerao no arquivo de saida, se nada estiver escrito eh porque nada ha para exibir
+
+A melhor ideia eh manter a linha mostrada
+usando um arquivo de multiplos .hccapx em um soh, nao alterar as instrucoes do
+comando, editar apenas o charset e testar suas wordlists,
+detalhe a cada teste com wordlist editar pra -a 0 e
+mudar o nome da lista pro caso da lista anterior ter dado uma saida em txt contendo algumas
+senhas nao venhamos a 
+sobreescreve-las acidentalmente.
+
+
+
+A TRETA É SIMPLES INSERINDO O -o PARA UM ARQUIVO DE SAIDA EM TXT, ISSO SÓ OCORRERÁ SE HASHCAT ACHAR ALGUMA HASH
+SE NÃO TIVER UM ARQUIVO TXT EM SEU DESKTOP SIGNIFICA QUE VOCÊ DEVE TENTAR UM OUTRO CHARSET PORQUE COM O ATUAL
+NÃO FOI DISCOBERTA NENHUMA HASH.
+
+-----------------------------------------------------------
+

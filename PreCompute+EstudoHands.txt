@@ -1,0 +1,64 @@
+Para um ataque eficaz criaremos no crunch no minimo 14 arquivos txt que importarenos como txt mas exportaremos como cowpatty com o Pyrit para em seguida criar um db com airolib-ng afim de usa-los em um db com aircrack-ng e um arquivo cap ou ainda exportar um unico arquivo cowpatty do airolib-ng e usa-lo no cowpatty com um arquivo .cap para uma quebra ainda mais rapida.
+
+1-  Usando o crunch crie 14 arquivos txt com as seguintes características:
+
+10 arquivos de 8 digitos cujo o primeiro digito em cada arquivo seja crescente de 0 a 9. Os arquivos devem ser nomeados da seguinte forma 8digX.txt onde X represente o número que ocupa a primeira posição dos 8 digitos correntes.
+
+ao final teremos 10 arquivos que pertencem ao grupo dos 8 digitos.
+
+em seguida crie mais 4 arquivos arquivos estes que serão gerados da seguite forma:
+
+Todos os arquivos deste grupo devem conter 9 digitos,  sendo que o segundo digito deve ser ocupado peloa numeros 6,7,8,9 em cada arquivo respectivamente.
+Os arquivos devem ser nomeados da seguinte forma 9digX.txt onde X represente o segundo numero de cada arquivo corrente.
+
+feito isso teremos 14 arquivos no total, arquivos estes que cobrem todos os numeros de telefones fixos locais, datas de nascimento, e numeros de celulares cobrindo ainda os que incluem o nono digito.
+
+Agora vamos pré-computar estes arquivos anexando-os a um ESSID especifico com o pyrit.
+Esse processo é o mais demorado, podendo alcançar a marca de até 4 dias...
+Após importação de cada arquivo de texto em um único ESSID a ideia é criarmos um processo em lotes e após o mesmo exportar os arquivos como cowpatty.
+
+Ao acabarmos o demorado processo, vamos criar com esses 14 arquivos cowpatty 1 banco de dados que pode ter 2 destinos. 1 ser usado para quebra de um handshake com aircrack-ng. 2 pode ser usado para exportar uma unica cowpatty que contenha todos os arquivos.
+
+A idéia é um tanto simples, mas a dificuldade desta técnica se dá pelo fato de ter que perder muito tempo gerando os arquivos pré computados. Imagine se para cada handshake que você fosse quebrar tivesse que pre-computar suas wordlists?
+Isso definitivamente seria demorado.
+
+A ideia é precarregar SSID's padrões, pois assim quando surgir uma rede com esse SSID precarregado a quebra torna-se possível em cerca de 9:13 m|s com cowpatty.
+
+Caso contrário não resta alternativas se não brute-forces focalizados ou precomputar hashs.
+
+-----------------------------------------------------------
+
+Estudo dos 4-way-handshakes
+
+Para ter certeza de que um handshake está perfeito para quebra é nessario fazermos uma checagem, ja que se algo de errado não estiver certo poderemos perder muito mais muito tempo mesmo com um arquivo que não é válido.
+
+Depois de muito tempo aprendi essa lição, sempre que capturarmos um handshakes devemos scania-lo para quebra-lo só em seguida.
+
+Existem 4 formas de se fazer isso, são elas:
+
+1- Usando o Wireshark nós podemos fazer a leitura de trafego de arquivos cap de handshakes e também arquivos de replay.cap...
+
+2- Usando o pyrit -r analyze, desta forma você poderá ver se o handshake sendo classificado como (BAD) não da pra quebrar, ou (GOOD*) pros que estão perfeitos para quebra.
+
+3-  Usando o aircrack-ng, se usarmos um arquivo de texto junto ao comando -w e seguido do cap.. Conseguimos ver com clareza os handshakes verdaderos marcados com (1) bem como bssid e essid.
+
+4- Usando o conversor cap2hccapx.bin de cap hccapx do hashcat, desta forma você vê com clareza todos os handshakes, se houver um perfeito para quebra será indicado na parte Message Pait= com o valor 1 ou 2...
+se estiver com valor 0 significa que foi uma entrada, mas não significa que é a senha correta... e também significa que pode ter sido capturado antes da confirmação do roteador, o que torna-se duvidoso e ai que entra a principal diferença entre o Aircrack-ng e o Cowpatty.
+
+aircrack-ng tende a revelar qualquer entrada de senha no handshake, mesmo que não seja a correta enfim qualquer tentativa insistente virá a ser mostrada.
+
+cowpatty tende a revelar somente a senha correta.
+
+ou seja cada software tem sua hyper importância.
+
+porém neste caso a maior importância é saber se seu arquivo contém a senha certa, portanto para conhecermos o handshake é indicado usar a técnica numero 2 e a numero 3 juntas pra ser preciso.
+
+Na minha opinião o melhor é cap2hccapx.bin ele funciona de forma exata, e após a informação ser obtida, nós podemos utilizar o arquivo cap normalmente para o cowpatty... ou mesmo o aircrack.
+
+É de fundamental importância também que se capture o handshake de 1 unico ap de um unico cliente em um unico arquivo sisteminha chamado 3U.
+
+feito isso, converta e observe se o Message Pair está com valor 2 isso significa que tem uma hash valida no handshake. Outra coisa importante é adiantar o processo de recaptura, isso é fazer a captura de cada cliente individualmente e consecutivamente renomeando apenas o arquivo de saida e também logicamente mudando o cliente.
+
+sairão em poucos os resultados dos testes instanteneos
+
+Com pyrit o arquivo valido apresenta #HMAC_(TIPO DE HASH) 

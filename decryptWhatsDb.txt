@@ -1,0 +1,16 @@
+http://whatcrypt.com/?cmd=_decrypt#.VaxB6aPLda0
+
+Vulnerabilidades do WhatsApp
+
+O whatsap aceita QR code para WWhatsapp Web modo Desktop.
+
+O Whatsapp Aceita troca fácil de dispositivos se via chip trocado e 
+restart completo do whats do new dispositivo.
+
+O Fishing do github lá QLRinject
+
+e eu suspeito que aceite um bruteforce no link de
+autenticacao gerado pelo servico smnp que roda no dispositivo
+durante a primeira configuracao, onde o chip de referido numero recebe
+um codigo de 6 digitos tal codigo que garante o acesso ao usuario.
+Se fizermos uma solicitacao em um whatsapp puro, e um dump_sms certamente alcancaremos o codigo.

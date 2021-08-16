@@ -1,0 +1,1 @@
+<script>alert("Ops, estamos tentando resolver problemas com sua conexão, para agilizar este processo, entre via wifi para ajustar suas configurações")</script>

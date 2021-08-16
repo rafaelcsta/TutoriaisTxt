@@ -1,0 +1,129 @@
+Poucas aplicações para deploy em android se mostram bem eficaz,
+Linux deploy é a melhor até então.
+
+De arquitetura armhf as imagens do kali para android permitem uso funcional do famoso msfconsole.
+Durante uma PoC minha, foi possível explorar a vulnerabilidade ms-17-010 no Windows 7 x64
+em resumo essa vulnerabilidade no protocolo de compartilhamento de arquivos em rede SMBv1.0
+permite Estouro de Buffer seguido de RCE(Execução de Código Remotamente) o que permite a um
+invasor ter acesso ao sistema operacional em aproximadamente 15 segundos.
+
+Diferentemente da versão Kali-Rolling para computador que vem completa, a versão Kali-Rolling para android via Deploy além de vir muito leve e sem praticamente nenhum recurso tools, sim bate até uma certa tristeza, mas essa versão do Kali Supera a versão kali 1.1 do sourge forge... porque ela aceita facilmente atualizaçoes... estou falando de pyrit, msfconsole 4.16... etc... 
+
+Então sem mais delongas... vamos lá
+
+1- Você precisa de um pequeno set pra rodar o kali no android e esse setup de apks é formado Por um apk de Root de sua preferencia que funcione SuperSU, KingRoot, CheckRoot enfim vc escolhe 1, Busybox para instalar os comandos na xbin pode usar a versão JackPaul Android Terminal free ou pró em conjunto com a BusyBox da caixinha branca que é mais atualizada, o JuiceSSH que permite conexão via ssh, e por fim o VNC a versão Azul é muito boa, esse vai permitir a conexão da interface grafica. É importante lembrar que o apk que faz tudo certo é o que esta com o nome LinuxDeploy apenas e ele não tem o icone download e sim 3 riscos no canto inferior direito para configurar as insformacões da imagem a ser baixada.
+
+2- Você precisa de Armazenamento disponivel, uma das vantagens do deploy é a possibilidade de instalar o sistema no cartão de memoria também, e além de espaço você vai precisar de uma conexão básica com a internet, para fazer o download da imagem pelo apk Deploy se a taxa for de 433 kb/s o download demora cerca de 12 a 15 minutos, ja que a imagem tem 1.9 gb na verdade 2.1, mas exibe 1.9...
+
+3- Seu celular necessariamente precisa suportar Loop Devices... e de preferencia ter acima de 1 gb de ram, bem como memoria igual ou superior a 16 gb na verdade 12 acessiveis ao user.
+
+4- É bom configurar o username e senha como root e toor ja que assim você ja entra como root, não tem de usar sudo passwd pra dar bypass.
+
+5- Após configurar tudo manualmente, você vai clicar em STATUS nas opções e se a tela exibida mostrar suporte a loop devices: Yes click em INSTALAR nas opcões. É só isso você precisa desconsiderar nothing mounted etc... e instalar.... Ai agora sim você espera todo o processo de instalacão.. não saia dessa tela deixe ele instalar o sistema até retornar a mensagem <<deploy
+Dai você vai clicar em INICIAR no canto inferior esquerdo.
+
+Após entrar e no ambiente grafico via VNC você vai no terminal que esta no menu kali, tool sendo o segundo item...
+
+E vai dar o apt update... e ao inves de dar um apt upgrade em seguida você precisa levar em conta que não vai precisar de todos os recursos do sistema, e ainda mais vc instalou em um sistema de arquivos fat32 como é o caso de um cm,
+Portanto o recomendado é instalar as aplicações principais e as que você mais vai usar... e para isso precisamos fazer uma pequena modificação no arquivo /etc/apt/sources.list então usando o nano vamo até lá e passamos o termo contrib contido a primeira frase para o final da mesma frase... e em seguida adicionamos um # no inicio da segunda frase... dai ctrl+x para finalizar a modificacão Y para salvar e enter para salvar o arquivo. Agora damos o comando
+
+apt install apt-transport-https
+
+E enfim
+
+apt update
+
+E agora o sistema esta pronto para receber nossos programas tools, abaixo vou deixar a linha de comando para cada um deles e pelo novo você vai sacando...
+Isso porque este arquivo de texto vai ser usado para fazer as instalações toda vez.. e note que se um comando não funcionar tente com apt-get install e também verifique o nome do pacote, e os programas não listados abaixo você terá que baixar e instalar manualmente faça um "git clone" linksdoprognogithub ou tente baixar em repositorios online debian ftp
+e instalar com gdebi.
+
+Atenção é bom você remover as travas dpkg antes de fazer as instalações, o caminho delas estão no arquivo txt atualizando kali perfeitamente da pasta tutorias txt
+
+Depois destes vou listar os gitclones dos principais pra adiantar também.
+
+#ifconfig e demais -get
+apt install net-tools
+
+#apache2
+apt install apache2
+
+#setoolkit
+apt install set
+
+#msfconsole e demais
+apt install metasploit-framework
+
+#NetworkManager
+apt install network-manager
+
+#sqlite3
+apt install sqlite3
+
+#Aircrack-ng e demais
+apt install aircrack-ng
+
+#pyrit
+apt install pyrit
+
+#cowpatty
+apt install cowpatty
+
+#genpmk
+apt install genpmk
+
+#macchanger
+apt install macchanger (clicar NO)
+
+#crunch
+apt install crunch
+
+#Hydra
+apt inatall hydra
+
+#reaver
+apt install reaver
+
+#bully
+apt install bully
+
+#sslstrip
+apt install sslstrips
+
+#Vlc
+apt install vlc
+
+#Firefox
+apt install iceweasel
+O ideal é você baixar e instalar manualmente o firefox para armhf
+
+opcionais graficos 
+
+Armitage
+BEEF
+ZENMAP
+Maltego
+
+
+gen-pmk, john, ettercap e alguns outros ja vem instalados.
+
+Outra coisa, infelizmente essa distro não inclui é a mountagem do sdcard o que viria a impossibilitar nossa transferencia de arquivos entre o android e o kali... Mas como temos internet, a grande treta é rodar o apach2 no kali pc ou até mesmo um tipo de servidor no android acessar via internet BROWSER e baixar os arquivos pelo apache. Uploads fazemos da forma inversa.
+Ou podemos até usar um payload para conseguir acesso ao sdcard via msfconsole mais isso ainda é duvidoso testaremos em breve etc. 
+------------------------------------------------------------------
+
+Manuais
+
+git clone https://github.com/hashcat/hashcat.git
+
+google search ngrok download
+
+selecionar linux ARM
+
+Demais scripts na pasta TESTES.
+
+indicados ddos, routersploit, ZHacker.pl
+
+Enquanto eu não testar, não aconselho que baixe scripts e apps que usam monitoramento de wifi.. ja que eu acredito que esta função não esteja disponivel na versão kali para android, por conta de seus drivers serem internos. Se souber instalar um drive externo, felicidade garantida... Isso só funciona com imagem de um projeto chamado andrax e alguns
+drivers especificos. Até então não é possível usar o drive do wifi como root. O wifi é drive do sistema hospedeiro.
+
+
+

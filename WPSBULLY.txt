@@ -1,0 +1,5 @@
+airmon-ng start wlan0
+wash -i mon0 
+bully -b mac -vv
+
+estar perto, usar os no.

@@ -1,0 +1,56 @@
+Para configurar o ip externo você deve ter uma conta em um
+redirenacionador de ddns estático instantaneo como o no-ip,
+dydns etc, daí vai funcionar nas redes abaixo do nível de seu provedor...
+
+1- Criar seu nome de host e mante-lo atualizando
+2- Ter acesso ao roteador, abrir todas as portas
+que serao usadas e no item redirecionamento ou 
+forwarding e adicionar o ip fixo tambem na reserva
+de endereco e em servidores virtuais.
+3- o seu nome de dominio deve ser anexado ao ip wan do seu
+roteador, ou seja o proprio no ip detecta automaticamente seu
+ip externo e o configura para acessar este determinado ip
+(no caso o de seu roteador na LAN do roteador do provedor)
+permitindo assim o acesso externo para interno em sua rede,
+roteador e os dispositivos conectados a ele.
+
+Meu primeiro nome de host obtido e configurado com sucesso
+
+segue a lista:
+
+1- blackcybeartosac.ddns.net
+2-
+3-
+4-
+5-
+
+Uma facanha tentadora que todo mundo se sentira
+obrigado a fazer assim que iniciar um ddns dinamico
+serah o clone de pagina, e para fazermos isso
+precisamos usar uma porta compativel com o servico
+escolhido(neste caso o apache) e entao editar o
+arquivo de configuracao neste caso
+
+nano /etc/setoolkit/set.config
+
+substituimos o numero da porta no item APACHE PORT=80
+
+443 eh uma boa..
+
+se for soh para o apache comum a fim de download de arquivos
+
+nano /etc/apache2/ports.conf
+
+editamos o numero que estah em Listener (80)
+
+pro caso de tcp conexao reverse use o endereco externo para tcp com ngrok: 0.tcp.ngrok.io
+Para uma melhor fluencia em um ataque de phishing acessível em escala global você pode
+contratar uma vpn como ipjetable.net que é pptp e setar o ip dela no seu ddns no-ip.
+
+Após isso seu sevidor, independente para qual finalidade estará acessível literalmente
+a todo mundo.
+
+Voce pode testar abrindo uma porta na sua máquina e tentando acessar seu link seguido da porta
+apartir de uma rede diferente da sua ou do 3/4/5g.
+
+

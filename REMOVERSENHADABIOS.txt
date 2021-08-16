@@ -1,0 +1,9 @@
+PASSO 1- Digite senhas incorretas 3 vezes.. ateh exibir a msg de erro
+PASSO 2- Tire uma foto do codigo que ira aparecer na tela que parece
+estar em hexadecimal.
+PASSO 3- https://bios-pw.org
+digite o codigo que esta na foto e verah a senha do user.
+
+outra maneira eh abrir o pc, retirar a micro bateria redonda
+por alguns minutos... e mudar a posicao do pino que tem descricao
+clear sei que la na placa.

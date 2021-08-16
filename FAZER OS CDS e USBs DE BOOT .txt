@@ -1,0 +1,34 @@
+sábado, 3 de março de 2012
+
+Criando um cd ou dvd bootavél com várias imagens ISO
+
+Que tal ter em mãos um dvd com a opção de instalação de vários sistemas operacionais,
+ por exemplo, que tal em um único dvd ter o Windows7, Windows XP, e pra variar um pouco o Ubuntu,
+ Simplismente a opção de escolha entre 3 Sistemas Operacionais de instalação no mesmo dvd, excelente né.
+ Então vamos lá precisaremos de um programa chamado X-boot clique aqui após descompactar o programa
+ é só clicar no ícone não é necessário instalação, com o programa aberto iremos somente clicar nas imagens
+ e arrastar para dentro do programa, é importante lembrar que o programa só aceita imagens no formato ISO,
+ imagens do Nero(NGR) por exemplo não são aceitas, para converter as imagens usaremos um programa chamado Ultra-ISO
+ (muito bom por sinal, vale a pena ter instalado no pc) clique aqui depois de convertidas as imagens na opção ferramentas,
+ converter imagem para o formato ISO é só arrastar as imagens para dentro do programa, se abrir uma tela verde
+ é só escolher a opção de boot mais próximo da imagem ou na dúvida é só escolher
+ a primeira opção (add using Grub4dos ISO image Emulation).Após este processo é só escolher a opção Create ISO que
+ o programa irá criar o cd ou dvd multiboot que após criado poderá ser testado com a opção QEMU, após o teste é só gravar
+ em uma midia usando o próprio Ultra-ISO e bootar pelo cd/dvd-rom, se desejar criar um pen drive multiboot é só escolher Create
+ USB(algumas placas antigas não dá a opção de iniciar pelo pen drive) iniciar o computador com a opção de boot via USB, abraço a todos.
+
+DETALHES, for gravar ISO em DVD velocidade menor possível para dvd e a media para cd.
+
+A velocidade ideal para gravação de um DVD é de 4X para menos e de um CD 8X pois isto esquilibra com a velocidade dos HDs mais antigos mesmo em uso.
+
+metodo DAO.
+
+Usb-Bootaveis:
+
+Balena
+Rufus
+PowerIso
+UltraIso
+Netspeed ou netspace bootavel
+YUMI, YUMI UEFFI
+

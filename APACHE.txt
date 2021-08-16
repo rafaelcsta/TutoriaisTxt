@@ -1,0 +1,39 @@
+aqui vamos editar a porta em que o servidor apache roda.
+
+cd /etc/apache2/
+
+cat ports.conf
+
+ou podemos ir direto ao assunto e mudar o n da porta
+
+nano /etc/apache2/ports.conf
+
+
+Listen 80
+
+trocamos o 80 por 443 ou 8080... enfim
+
+assim estaremos substituindo a porta a ser usada pelo apache.
+
+Devemos testar isso tambem em outros programas fica a dica.
+
+DETALHE testamos com o iptables o modo redirect --to-port que consta
+no arquivo Ataque sslstrip.txt e nada funcionou... talvez se nao funcionar
+com apenas 1 devamos usar os 2 modos aplicar as duas linhas de comando pode
+ser realmente util.. mas primeiro tentamos essa ports.conf
+
+
+COLOCANDO SENHA EM DIRETORIO EXIBIDOS PELO APACHE.
+
+1- sempre antes de modificar qualquer arquivo oficial do sistema,
+faca uma copia de seguranca para /root/
+
+2- agora sim siga o tutorial, isso eh apenas para reconfigurar
+corretamente caso seu servidor pare de funcionar por conta da modificacao.
+
+siga esse tutorial 
+
+http://www.nanoshots.com.br/2015/12/protegendo-diretorios-do-apache-com.html
+
+e boa sorte
+

@@ -1,0 +1,12 @@
+att grub
+
+update-grub
+
+mudar imagem do grub
+
+cp imagem.png ou .jpeg /usr/share/images/desktop-grub/
+
+nano /etc/alternatives/desktop-grub.sh
+
+edite a primeira linha com o caminho da imagem .png .jpeg
+

@@ -1,0 +1,426 @@
+ARQUIVOS DE CONFIGURAÇÕES
+
+Zanti Alert 1 Android
+
+<script>alert("Atenção, Se Você Estiver Usando Um Dispositivo Android, Para Continuar Sua Pesquisa Selecione OK, Se Estiver Usando Outro Dispositivo Não Será Possível Conectar-se")</script>
+
+Zanti Alert 2 PC
+
+<script>alert("Atenção, Se Você Estiver Usando Um Computador, Para Continuar Sua Pesquisa Selecione OK, Se Estiver Usando Outro Dispositivo Não Será Possível Conectar-se")</script>
+
+------------------------------------------------------
+
+Configurações dos Payloads
+
+Sempre usar o nome do arquivo padrão no sistema, para isso renomer tirando o ip que é apenas para identificar o endereçamento remoto e inserir o nome do arquivo a ser substituido.
+
+Opções de inserção
+
+1- AFK: Atacando Fisicamente é a forma mais fácil e perfeita de configurar sua backdor, pois as opções são ilimitadas bem como a facilidade na substituição de um arquivo com privilégio root, mas se estamos falando de hackear alguém pode ter seus pontos desconfortáveis.
+
+2- ARI: Atacando Remoto-Internamente é uma forma de ataque forçado que não é tão silenciosa, mas que também tem grande chance de sucesso a menos que sua vítima possua anti-virus e browsers atualizados. A vantagem aqui é a possibilidade de anonimato legitimo
+ja que se usar o dmz consegue-se ocultar o mac do dispositivo real expondo apenas o do roteador usado.. que pode ser descartável.
+
+3- ARE: Atacando Remoto-Externamente é uma forma muito radical e um tanto sofisticada de tentar uma conexão, além de você ter que ser expert no assunto, deve configurar um ddns fixo em um roteador que suporte o serviço como por exemplo (TP Link que suporta No-Ip)  O interessante desse tipo de ataque é que ele te dá acesso ao mundo, então você pode setar um link no redirecionamento em nuvens como MEGA, MEDIA FIRE, GOOGLE DRIVE, FOUR SHARED etc... e setar o ip externo no seu payload, dando assim conexão com o mundo, qualquer dispositivo, maquina isso é real.
+
+---------------------------------------------------------
+
+Configuração Router para ataque
+
+0- Marcar um roteador fixo que fará só funções pentesting.
+
+1- Escolher um alvo AP, clona-lo e furtar seus clientes para seu ap salvando todos os bssids e descrições. Detalhes a internet não precisa ser do proprio ap a ser clonado, apenas as informações, de preferencia usar as duas maquinas uma seta tudo na rede e outra rola o evil twin no ap a ser clonado, o que força os clientes a virem até seu ap #lembrar de por o mac identico!(O ataque tem que ser perfeito, o mac é um detalhe se bloquear a official a falsa sobressai).
+
+2- Definir a reserva de endereço pro host atacante e elaborar o esquema da conexão dos clientes none ou wpa2.
+(Exigência EXPLORAR O MÁXIMO DE ATAQUES POSSÍVEIS A FIM DE OBTER INFORMAÇÕES CLARAS)
+
+3- Se quiser inserir o filtro de mac para você e uma determinada vítima é também um ponto a mais. (Assim a net não vai ficar lenta e seu acesso é certeiro) Obs tem que ser perfeito, a vítima é que escolhe morder a isca, e para saber qual está com mais fome é necessário também uma máquina exclusiva para o monitoramento de sua rede evil twin, e outra pro ap vitima.
+Assim tudo fica claro.
+
+4- Todos os dispositivos tem que estar bem carregados e restritos ào serviço e também sincronizados ao tempo do ataque, tudo deve ser levado em conta, principalmente o tempo... desde os minutos ao tempo que se digita uma linha de comando.
+
+5- O ultimo dispositivo a ser configurado será o SSID da rede para clone. Previamente deve-se obter o mac do seu ap e não usar o ssid antigo nem iniciar o novo com o nome clone antes de estar tudo configurado para não dar ruim!!!
+
+6- 
+
+-----------------------------------------------------------
+
+UPGRADE PERFEITO PARA KALI LINUX
+
+
+pré-requisitos
+você tem que fazer isso durante a madrugada, porque as taxas de kb da internet são muito mais altas tornando viável a atualização da distribuição.
+Isso requer uma rede que faça em média 100kb por segundos com picos de no mínimo 350 kb/s. Ou simplesmente uma internet rápida!
+
+O processo on-line pode demorar muito, bem como o de instalações em seguida.. 
+
+mas como a primeira etapa depende da velocidade da internet, eu só posso estimar um tempo para a segunda etapa:
+
+Se seu processador for um dual-core, ele faz essa 2a etapa em apx 1:30 horas.
+
+Um conselho é você usar o comando de 
+apt porque ele mostra um prazo e também a execução ao invés de apt-get que só mostra a execução.
+
+primeiro passo, setar A sources.list correta. verificar no google, kali.org/sources.list
+
+clicar no que tem release....
+atualizar a lista com leafpad /etc/apt/sources.list
+
+ctrl+s para salvar.
+
+depois dar o comando
+apt transport lá que ta no txt...
+ele vai atualizar as listas.
+
+em seguida iniciamos o apt-get update
+
+que carregará cerca de até 35 mibs de arquivos de listas com os pacotes....
+
+depois disso é de extrema importância remover as lock(travas) do dpkg.
+
+rm /var/lib/apt/lists/lock && rm /var/lib/dpkg/lock
+
+
+OBS podemos repetir os comandos acima após falhas durante as atualizações para remover as travas caso elas retornem.
+
+efim
+
+apt upgrade
+
+obs durante esse processo provavelmente surgirão telas azuis de reconfigurações, são elas
+
+1a- Wireshark: Não Super Usuários poderão capturar pacotes?
+
+R: (NÃO)
+
+2a- Deseja restartar os serviços durante o upgrade?
+
+R: (NÃO)
+
+3a- Esta não é uma tela azul, mas sim um script no mesmo terminal do upgrade.
+
+Ele pergunta se você quer instalar uma versão atualizada de um programa lá que tem um arquivo .yim ou algo do tip.
+
+R: (NÃO)
+
+--------------------------------------------------------------
+
+Prevenir Fatal Erro no Windows e Instalando Corretamente o DualBoot
+Windows 10 e Kali Linux
+
+Sempre intalar o kali por segundo emdiante, nunca excluir partições de 500 mb à 2 GB que aparecem no particionamento de discos.
+
+Corrigindo o erro de inicialização:
+informações adiantadas DVD com sistema e configurar o item dar boot pelo CD na opção de boot oculta de boot na bios.
+
+https://m.youtube.com/watch?v=Zamwbm3XpdQ
+
+OBS esse erro ocorre por ativarmos o Flag inicializável durante a instalação do kali, ao fazer isso ao dar o boot o hd iniciará a partição do novo sistema como partição principal (a partição que contem o sistema operacional) dai a partição em que o windows se encontra acaba não sinalizando e o sistema fica bugado.
+
+Prevenção, como o Kali ja roda em live cd e tem também durante a instalação a opção de faze-la no registro master de inicialização GRUB para que o erro não ocorra é necessário que o FLAG inicializavel fique DESLIGADO. Assim seu dual boot será bem sucedido.
+
+DETALHE
+
+Para mudar a imagem de inicialização no GRUB
+
+A imagem deve ter obrigatoriamente menos de 1 MB  sendo tamanho ideal 157 kb preferencialmente L=1920 A=1080(1200) 
+Se a imagem tiver acima de 921,9 kb o ideal é tirar um print no proprio kali e usar o arquivo do print na tela grub.
+O formato padrão aceito é .jpg (jpeg) e .png
+mas nada que um print não resolva.
+Testar depois mudar o formato de imagem . para .jpg 
+
+tendo os pré requisitos iniciamos:
+
+cp yourfile.jpg /usr/share/images/desktop-base/
+
+nano /etc/alternatives/desktop-grub.sh
+
+WALPA...vá até o nome do arquivo de foto atual e substitua-o pelo nome do yourfile.jpg
+
+depois que você modificar ctrl+x
+para Salvar alterações S depois ENTER.
+
+agora:
+
+update-grub
+
+esperar ele carregar achar os outros sistemas e finalizar.
+
+enfim:
+
+reboot system
+
+OBS se der uma tela azul não se desespere, tire um print da imagem e refaça o processo com o screnshoot obtido... Se nao der certo veja se não esqueceu de atualizar o arquivo .sh e em seguida o priprio grub.
+
+Se ainda sim não der certo pode ser que você precise de uma outra imagem mais larga ou mais alta ou em kb...
+tente com uma que se encaixe nos quadros e seja feliz... só repetir o processo com a nova imagem.
+---------------------------------------------------------------
+Meta Computacional 2018
+
+#Comprar duas placas que sejam Nvidia GeForce series GT 730 à 960 (m)
+E Demais Hardwares Para Conexão das Placas.
+
+#Instalar Nvidia Modulo /Tutoriaistxts/GEFORCENIVIDIA.txt/CUDA.txt/"cuda droga.txt"
+
+
+---------------------------------------------------------------
+
+Quebrando senhas Linux AFK
+
+unshadow /etc/passwd /etc/shadow >> senha_root.db
+
+john senha_root.db
+
+----------------------------------------------------------------
+
+Super Interessante
+
+Assim como o Windows tem seu diretório de executáveis padrões auto-inicializaveis no sistema, qualquer sistema também tem, e um muito visado é o Android
+Segue seu mapeamento
+
+O android possui apps bem interessantes como o hangouts que não usamos para nada entre muitos outros, mas se tem um que me chama a atenção é o talkback, porque ele é como o narrator do Windows. Um app que você configura pra auto inicializar e que ao mesmo tempo é padrão do siatema, tudo bem que não tem como acessa-lo via lockscreen, mas uma vez configurado eu gosto de pensar na possibilidade de isso ser real e sabendo que desbloqueado auto-inicializa é o suficiente para me convencer.
+
+Portanto, faça um payload para android que leve o nome talkback.apk e tenha permissões de leitura e escrita para root, leitura para membros do grupo, leitura para outros usuários, ativando apenas o binário executável.
+
+A tarefa é inseri-lo via rede no file system/app/talkback/talkback.apk de um dispositivo android detectado por um scanner de rede.
+
+E deve-se ativar o talkback persistent o mais rapido possível durante o curto AFK.
+
+------------------------------------------------------------
+Como montar um rede zumbi (botnet) [2015] (DDoS) 2yxa.ru
+-------------------------------------------------------------
+
+Werisharke link tutoriak foda
+
+http://www.marcosmonteiro.com.br/index.php?option=com_content&view=article&id=611:usando-o-wireshark&catid=42:redes-de-computadores&Itemid=70
+
+----------------------------------------------------------------
+
+Anotações
+
+packetforge-ng (ver)
+
+arquivos a copiar e excluir no windows... nunca excluir pasta inteira sem verificar
+
+*####**###
+
+System32/
+
+WF (Prevenção de Softwares Maliciosos Remoto
+
+Firewall.cpl
+
+não roda executar só no cmd
+
+
+
+-------------------------
+ProgramFiles
+
+%ProgramFiles%\Windows Defender\MSASCui.exe tbm o MpCmdRun.exe
+
+
+c: Arquivos de Programas (x86)\Windows Defender
+
+c: ProgramFiles\Windows Defender Advanced Threat Professional
+
+
+estima-se apx 35 mbs
+----------------------------------------------
+
+C: \Program Files (x86) \Google\Chrome\Application\
+
+ Chrome.exe
+
+Deve ter um substituto no Files System comum verificar lá tbm se não tiver show de bola.
+
+mas tem um em AppData tbm
+
+######**#****#*##*#*#*#**
+
+WINDOWS EXES
+
+
+control userpasswords2
+
+userinit.exe (explorador de arquivos)
+
+Utilman.exe
+
+utilman.exe
+
+sethc.exe
+
+EaseOfAccessDialog.exe (shift 5 vs)
+
+WindowsUpdateElevatedInstaller.exe
+
+Windows.Media.BackgroundPlayback.exe
+
+wimserv.exe
+
+wifitask.exe
+
+wiaacmgr.exe (pode muito ser backdor)
+
+WFS.exe (fax)
+
+wermgr.exe
+
+
+wbadmin.exe (ferramenta backup)
+
+wbengine.exe
+
+WebCache.exe
+
+WallpaperHost.exe
+
+waitfor.exe
+
+verifiergui.exe (editar conta)
+
+verifier.exe
+
+verclsid.exe
+
+vssadmin.exe 
+
+UserAccountBroker.exe
+
+osk.exe (teclado virtual)
+
+Narrator.exe
+
+vds.exe
+
+vdsldr.exe
+
+UserAccountControlSettings.exe
+
+tasklist.exe (lista os exe em uso)
+
+
+systeminfo.exe  (lista infos studo)
+
+psr (cria arquivos passo a passo)
+
+pwcriator (cria Desktop wtogo no pendrive)
+
+BdeHdCfg.exe (Preparação de unidade de disco para Cryptografia Bitlocker)
+
+chgport.exe (procura porta seriais)
+
+change.exe (muda de usuario)
+
+tscon.exe (anexar sessoes user e remote)
+
+qprocess.exe (ver os exe executando no host)
+
+PresentationSettings.exe (configura a maquina para não bloquear e desativa as notificações...)
+
+msg
+
+PrintBrmUi
+
+mblctr
+
+SnippingTool (selociona area da tela especifica para foto)
+
+rdpinit (logoff para remote acess rdp)
+
+mstsc (remote conect host)
+
+xpsrchvw (chmod do Windows permissões)
+
+mrt (remoção de softwares maliciosos)
+
+Firewall.cpl (Firewall do Windows)
+
+C:\Users\nomeuser\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\System Tools\Painel de Controle
+
+mspaint (paint)
+
+msinfo32
+
+control.exe (painel de controle)
+
+tcmsetup (client telefonia)
+
+
+SystemPropertiesDataExecutionPrevention
+
+printui
+ntprint
+
+cmdkey
+
+DiskSnapshot
+
+bootcfg
+
+Dism
+
+msdt
+
+rasautou.exe
+
+Taskmgr.exe /7
+
+Magnify.exe (lupa)
+
+ncpa.cpl (criar ponte)
+
+Run.lnk
+
+sihost (Tela Preta kkkk)
+
+locate Settings (no kali para achar o icone configurações no d system32)
+
+-------------------------------------------------------
+
+Estamos a procura da melhor opção para ser nossa backdoor no System32
+
+O melhor candidato até então é o 
+narrator.exe que pertence ao facilidades de acesso da tela de bloqueio.. pode ser também o nosso prompt/NT, a vantagem dele entrar como back é pelo fato de ele ter um botão de autoinicialização automática o que renovaria nossas sessões automaticamente no msfconsole como prompt perderiamos esta enorme praticidade.
+
+O Segundo candidato é o magnify.exe
+que é a lupa, também consta em nosso menu de facilidade de acesso na tela de bloqueio, a grande vantagem dele é que ao precionarmos as teclas WIN e + ele é chamado imediatamente o que estabilizaria as nossas sessoes no metasploit não seria vantagem perder essa praticidade pelo prompt.
+
+O Terceiro candidato é o osk.exe ou mais conhecido por Teclado Virtual do Windows, este não inicializa automaticamente o que não nos da a  vantagem de reconectar no msf, mas em contrapartida é uma excelente opção para o prompt de comando NT, porque usar o utilman acaba não sendo discreto, a pessoa vai perceber em pouco tempo as violações, enquanto ao usar o teclado o utilman manterá o facilidade de acesso e o osk que é sub arquivo sendo por isso menos visado ou clicado acaba sendo uma opção muito segura.
+
+Se for falar de uma backdoor EXPLICITA o iniciar é um ótimo candidato assim como o explorer. Mas não queremos isso.
+
+ATENÇÃO:
+
+Esse tópico é extremamente importante,
+estamos falando de arquivos e comandos que farão sua invasão ser 100% proveitosa.
+
+Para executar um comando ou programa de forma remota durante a invasão. No seu lhost r > arquivo.txt dentro do arquivo escreva o nome do programa | 1 comando a ser executado (ou outro programa)
+
+A grande sacada aqui é transformar esse arquivo salvando como .bat ou usando mv para .bat dar o chmod 777 arquivo.bat, e fazer um upload do mesmo para a área de trabalho do rhost e executar a tempo antes que o usuario perceba, ou não ja que a ideia é que alguém o execute mesmo... Enfim dai podemos ver o máximo que somos capaz de fazer em um rhost hackeado.
+
+Não precisamos usar o john para quebra de senhas graças ao truque inicial.
+--------------------------------------------------------
+
+Nomes para Wordlists Brasileiros
+
+
+http://nomesportugueses.blogspot.in/p/nomes-brasileiros-de-z.html?m=1
+
+http://nomesportugueses.blogspot.in/2009/04/nomes-masculinos-de-a-z.html?m=1
+
+achar nomes femininos também.
+
+https://books.google.com.br/books?id=LbJKDAAAQBAJ&pg=PA95&lpg=PA95&dq=o+que+n%C3%A3o+fazer+no+airolib-ng?&source=bl&ots=Q2zgllJ2NA&sig=SC1BfAV_fDlsZqE7Vw9Svj3S7Bk&hl=pt-BR&sa=X&ved=2ahUKEwj-7smL46TXAhULFpAKHdkBA_cQ6AEwA3oECBgQAA#v=onepage&q=o%20que%20n%C3%A3o%20fazer%20no%20airolib-ng%3F&f=false
+
+-------------------------------------------------------------
+Airbase-ng criando ap
+
+https://www.vivaolinux.com.br/artigo/Ataque-de-Rougue-AP-com-AIRBASENG
+
+---------------------------------------------------------------
+
+Configurar Pyrit em Rede estudar man Pyrit traduzir e fazer experimentos para opção -u e testar -i e -o com file.tar.gz
+
+fim.

