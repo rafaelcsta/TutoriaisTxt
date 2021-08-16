@@ -1,0 +1,17 @@
+
+Lenovo
+
+F9 BOOT OPTIONS
+F10 SALVA CONFIGS (em todos)
+F8 inicia o menu de supote do windows para inicializar BIOS. (Ou F10 e depois F12)
+CTRL+ALT+DEL ReiniciaPC
+
+F2 nos mais antigos é a BIOS
+F11 as Opções de BOOT.
+
+Asus 
+
+F2 acessa a BIOS
+ESC acessa as opções de BOOT
+
+

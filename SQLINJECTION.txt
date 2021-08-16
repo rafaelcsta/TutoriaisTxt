@@ -1,0 +1,30 @@
+SQL
+https://www.youtube.com/watch?v=v7mqsrBWBeM
+
+HASHS:
+https://www.youtube.com/watch?v=feLAuOjEzF4
+
+SQLLINUX tem um video salvo na pasta TFPC/videos/
+
+https://desecsecurity.com/
+COMANDOS DE SLQ CONHECENDO muito bom!! Ricardo Longatto da DESEC Pentester
+
+https://www.youtube.com/watch?v=98SrzDwXuUY
+
+parte2
+https://www.youtube.com/watch?v=9RKDdJzD2ds
+
+ESSE Explorando SQL falha LONGATTO
+https://www.youtube.com/watch?v=0MLsMl3a89I
+
+INVESTIGAR DNS e FAZER TRANSFERENCIA DE ZONA
+https://www.youtube.com/watch?v=gdkerIv6z3s
+
+wireshark capturando trafego de dados de rede aberta
+https://www.youtube.com/watch?v=o4MaY-eRDi4
+
+destravando wps lock
+https://www.youtube.com/watch?v=Dugjclt2bH0
+
+attack wps reaver
+https://www.youtube.com/watch?v=LUHRrmAtUUo

