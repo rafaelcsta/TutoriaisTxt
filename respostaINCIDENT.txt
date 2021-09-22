@@ -1,0 +1,36 @@
+O arquivo /media/user/PG/firewall.txt tem relatos detalhados
+da ocorrencia de N1 da invasao.
+
+INICIO DE RESPOSTA AO INCIDENTE:
+
+https://www.homehost.com.br/blog/tutoriais/como-bloquear-um-ip-no-linux-usando-iptables/
+
+https://central.sierti.com.br/knowledgebase/73/iptables-Como-listar-e-deletar-regras-de-Firewall.html
+
+iptables -A INPUT -s IP -j DROP
+
+IP = IP que você deseja bloquear.
+
+Pronto, IP bloqueado!
+
+iptables -D INPUT -s IP -j DROP
+
+IP = IP que você deseja desbloquear.
+
+Pronto, IP desbloqueado!
+
+BLOQUEAREMOS O IP DO ALVO: 37.59.54.205
+
+SOLUÇÃO:
+
+Apos matar o processo, desligamos a rede e reiniciamos o pc...
+coletamos informações uteis apartir de uma sessao liveCD
+
+Usamos o iptables e criamos a seguinte regra, o ip do atacante serah bloqueado desde o boot
+nao podera estabelecer nenhum tipo de conexao com a minha maquina, o endereco ip
+estah banido em QUALQUER protocolo, tanto para conexao de ENTRADA e SAIDA.
+
+
+
+#honeypot Para windows
+http://www.insecuritynet.com.br/materias/como-criar-um-honeypot Windows
