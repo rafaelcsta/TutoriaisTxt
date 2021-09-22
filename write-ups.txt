@@ -1,0 +1,52 @@
+write-ups são relatórios de ctfs, bugbounts, pentests
+explica perfeitamente descobrimento e exploração das 
+falhas nos sistemas, aplicações etc...
+
+medium.com
+pentester.land
+
+No começo vc vai pesquisar por write-ups
+
+futuramente lançará na pesquisa falhas df de rotina....
+
+Com isso seu nível sobe para algo
+diferente ... está lidando com
+falhas que empresas grandes que tem grandes
+equipes de segurança e HTTPS, e ainda sim
+não conseguem ser 100% seguras. É um nível altíssimo
+
+Quando estiver experiênte nisso, passará ao nivel de
+whitehat, um hacker experiente que resolve falhas
+importantes para grandes empresas e pega recompensas.
+
+Ocasionalmente, aprenderá coisas top.
+
+Que opcionalmente ativem um perfil darkside...
+
+Seu novo foco em hacking:
+
+Fase 1:
+Treinar fases descritas no modelo de relatórios de pentenst.
+Aperfeiçoar OSINT, Humint e SIGINT...
+Escrever Relatórios de Pentest..
+
+Fase 2:
+Write-ups e Provas de conceitos... Explore e treine tudo o
+que precisar no google hacking.
+
+Teste de habilidades: https://www.acunetix.com/blog/web-security-zone/test-xss-skills-vulnerable-sites/
+tem tbm CTFs.. enfim...
+
+
+
+Fase 3:
+Quando estiver ganhando dinheiro firme e tiver todos os Hardwares
+que você nunca pôde comprar... Sinta-se realizado, ja vai ter
+chegado onde queria. Não deixe seu sonho de consumo te consumir.
+
+#ESCREVA TUDO O QUE APRENDER,FOI ASSIM QUE CHEGOU AQUI.
+USE TODOS OS SEUS RECURSOS PENSE RAPIDO E EFICAZ.
+TREINE COM OS DISPOSITIVOS A SUA VOLTA, OU MONTE SEU LAB.
+Aprender a ler BITS... comprar livros de python... linguagens
+fazer scripts... estudar algoritmos... Tudo isso é necessário
+
