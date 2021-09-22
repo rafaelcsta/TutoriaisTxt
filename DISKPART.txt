@@ -1,0 +1,22 @@
+http://drogariapop.com.br/wp-content/debug.log HIGH
+http://drogariapop.com.br/wp-includes/
+
+bancocn.com SQLi
+
+Os comandos são esses:
+ - Abra o prompt de comando 
+           Iniciar - Todos Programas - Acessorios - Prompt de Comando. OU Iniciar - Executar - CMD.
+Agora digite os seguintes comandos:
+1. Diskpart 
+        Uma nova janela será aberta, espere até o cursor aparecer.
+2. List Disk
+3. Select Disk 1 
+         Substitua o 1 pelo número referente ao seu pendrive
+4. clean
+5. create partition primary 
+6. active
+7. format fs=fat32 quick 
+          Pode ser usado NTFS se o pen drive for grande, e você usar para arquivos mais pesados.
+8. assign
+9. Exit
+
