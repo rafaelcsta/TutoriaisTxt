@@ -1,11 +1,24 @@
 WEP
 
-airmon-ng check kill
-airmon-ng start wlan0
+airmon-ng check kill (Mata os processos relacionadas a rede wifi)
+airmon-ng start wlan0 (ativa o modo de monitoramento na interface especificada)
 
-airodump-ng mon0 (copiar os detalhes do alvo)
+airodump-ng wlan0mon (escuta todos os canais de rádio, usado para ver e/ou copiar os detalhes da rede alvo)
 
-airodump-ng -c <ch> -w nomedoarquivo --bssid <mac> mon0
+BSSID = MAC Address do AP
+ESSID = Nome do Access Point
+PWR = Potencia de Sinal
+Beacons = Dispositivos informáticos low energy
+#Data = Quantidade de dados na rede
+CH = Canal
+MB = Megabytes
+ENC = Criptografia
+CIPHER = Cifra
+AUTH = Tipo de Autenticação
+
+
+
+airodump-ng interface -c <ch> --bssid <mac> -w NameOutFile
 
 ctrl+shift+n
 
@@ -142,19 +155,13 @@ FALHA KRACK
 
 https://www.krackattacks.com/
 
-
-
-TOPS SCRIPTS GITHUB
-
-https://github.com/jivoi/pentest/find/master
-
 --------------------------------------------------------------------------------------
 
 WPS BULLY DO GITHUB
 
 https://www.youtube.com/watch?v=Ny3IG4X8hHY
 
-link pra download na descicao....
+link pra download na descrição....
 
 apt-get -y install build-essential libpcap-dev libssl1.0-dev aircrack-ng pixiewps
 
