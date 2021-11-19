@@ -25,7 +25,7 @@ aircrack-ng -b <mac> nomedoarquivo-01.cap
 
 WPA e WPA2
 
-airmon-ng check kill (Mata os processos relacionadas a rede wifi)
+airmon-ng check kill (Mata os processos relacionados a rede wifi)
 airmon-ng start wlan0 (ativa o modo de monitoramento na interface especificada)
 
 airodump-ng wlan0mon (escuta todos os canais de rádio, usado para ver e/ou copiar os detalhes da rede alvo)
